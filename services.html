@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dyno Tuning — Zeus Performance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,700;1,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0B0D10; color: #FFFFFF; font-family: 'Inter', sans-serif; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; }
+
+    /* ── NAVBAR ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      height: 56px;
+      background: #0B0D10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+    }
+    .nav-logo { height: 36px; }
+    .nav-links {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav-links a {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #FFFFFF;
+    }
+    .nav-links a.active {
+      border-bottom: 2px solid #10A0F0;
+      padding-bottom: 2px;
+    }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-trigger { display: flex; align-items: center; gap: 5px; cursor: pointer; }
+    .nav-dropdown-arrow { font-size: 8px; opacity: 0.7; }
+    .nav-dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0B0D10;
+      border: 1px solid #2A2F37;
+      border-radius: 4px;
+      min-width: 270px;
+      padding-top: 10px;
+      z-index: 1001;
+    }
+    .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+    .nav-dropdown-menu a {
+      display: block;
+      padding: 13px 20px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      color: #FFFFFF;
+      text-transform: none;
+      letter-spacing: normal;
+      border-bottom: 1px solid #2A2F37;
+    }
+    .nav-dropdown-menu a:last-child { border-bottom: none; }
+    .nav-dropdown-menu a:hover { background: #10A0F0; color: #FFFFFF; }
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .btn-nav-call {
+      border: 1px solid #FFFFFF;
+      background: transparent;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      padding: 8px 20px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+    .btn-nav-quote {
+      background: #10A0F0;
+      border: none;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      padding: 8px 20px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 400px;
+      background-image:
+        linear-gradient(rgba(11,13,16,0.65), rgba(11,13,16,0.65)),
+        url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1400');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: 120px 64px 60px;
+    }
+    .hero-label {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #FB4102;
+      margin-bottom: 12px;
+    }
+    .hero-headline {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-style: italic;
+      font-weight: 800;
+      font-size: 64px;
+      line-height: 0.92;
+      text-transform: uppercase;
+      background: linear-gradient(180deg, #FFFFFF 0%, #EBEBEB 12%, #FFFFFF 26%, #B4B4B4 44%, #FFFFFF 58%, #909090 72%, #D8D8D8 86%, #FFFFFF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 20px;
+    }
+    .hero-body {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      color: #9BA3AE;
+      max-width: 520px;
+      line-height: 1.7;
+    }
+    .btn-schedule {
+      border: 1px solid #10A0F0;
+      background: transparent;
+      color: #10A0F0;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 10px 24px;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 24px;
+    }
+    .icon-calendar {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
+    /* ── CONSULT SPLIT ── */
+    .consult {
+      background: #0B0D10;
+      padding: 64px;
+    }
+    .consult-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: flex-start;
+    }
+    .consult-form-card {
+      background: #181C22;
+      border: 1px solid #2A2F37;
+      border-radius: 8px;
+      padding: 32px;
+    }
+    .consult-heading {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: #FFFFFF;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    .consult-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .form-input {
+      background: #0B0D10;
+      border: 1px solid #2A2F37;
+      border-radius: 4px;
+      padding: 12px 14px;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      width: 100%;
+      outline: none;
+    }
+    .form-input::placeholder { color: #9BA3AE; }
+    .form-textarea {
+      background: #0B0D10;
+      border: 1px solid #2A2F37;
+      border-radius: 4px;
+      padding: 12px 14px;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      width: 100%;
+      min-height: 140px;
+      resize: vertical;
+      outline: none;
+      margin-bottom: 16px;
+    }
+    .form-textarea::placeholder { color: #9BA3AE; }
+    .btn-submit {
+      background: linear-gradient(135deg, #10A0F0, #0A4DA8);
+      border: none;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 13px 32px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .consult-right {}
+    .consult-service-title {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 28px;
+      color: #10A0F0;
+      margin-bottom: 20px;
+    }
+    .consult-photo {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid #2A2F37;
+    }
+
+    /* ── CONTENT SECTION ── */
+    .content-section {
+      background: #14181D;
+      padding: 64px;
+    }
+    .content-section-alt {
+      background: #0B0D10;
+      padding: 64px;
+    }
+    .section-heading {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-style: italic;
+      font-weight: 800;
+      font-size: 36px;
+      text-transform: uppercase;
+      background: linear-gradient(180deg, #FFFFFF 0%, #EBEBEB 12%, #FFFFFF 26%, #B4B4B4 44%, #FFFFFF 58%, #909090 72%, #D8D8D8 86%, #FFFFFF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+    }
+    .section-heading-blue {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-style: italic;
+      font-weight: 800;
+      font-size: 28px;
+      text-transform: uppercase;
+      color: #10A0F0;
+      margin-bottom: 16px;
+    }
+    .section-body {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      color: #9BA3AE;
+      line-height: 1.8;
+      max-width: 820px;
+    }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 48px;
+    }
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .bullet-list li {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: #9BA3AE;
+      line-height: 1.6;
+      padding-left: 20px;
+      position: relative;
+    }
+    .bullet-list li::before {
+      content: '•';
+      color: #10A0F0;
+      position: absolute;
+      left: 0;
+    }
+    .bullet-list li strong { color: #FFFFFF; }
+    .steps-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 16px;
+    }
+    .steps-list li {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: #9BA3AE;
+      line-height: 1.6;
+      padding: 14px 0 14px 48px;
+      border-bottom: 1px solid #2A2F37;
+      position: relative;
+    }
+    .steps-list li:last-child { border-bottom: none; }
+    .steps-list li strong { color: #FFFFFF; }
+    .step-num {
+      position: absolute;
+      left: 0;
+      top: 14px;
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, #10A0F0, #0A4DA8);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      color: #FFFFFF;
+    }
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .benefit-item {
+      background: #181C22;
+      border: 1px solid #2A2F37;
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .benefit-check {
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(135deg, #10A0F0, #0A4DA8);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 11px;
+      color: #FFFFFF;
+    }
+    .benefit-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: #FFFFFF;
+    }
+
+    /* ── PARTNERS / CTA ── */
+    .partners {
+      background: #14181D;
+      padding: 64px;
+      text-align: center;
+    }
+    .partners-body {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      color: #9BA3AE;
+      line-height: 1.8;
+      max-width: 700px;
+      margin: 0 auto 24px;
+    }
+    .partners-row {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    .partner-badge {
+      background: #181C22;
+      border: 1px solid #2A2F37;
+      border-radius: 4px;
+      padding: 8px 20px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      color: #10A0F0;
+    }
+    .partner-sep {
+      color: #9BA3AE;
+      font-size: 13px;
+    }
+    .cta-note {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      color: #FFFFFF;
+      margin-bottom: 24px;
+    }
+    .btn-cta {
+      background: linear-gradient(135deg, #10A0F0, #0A4DA8);
+      border: none;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 14px 40px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    /* ── FOOTER ── */
+    .footer { background: #000000; }
+    .footer-divider {
+      height: 3px;
+      background: linear-gradient(90deg, #FAC309, #FB4102, #F70902);
+    }
+    .footer-inner {
+      padding: 32px 64px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 32px;
+    }
+    .footer-logo { height: 36px; margin-bottom: 8px; }
+    .footer-tagline {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      color: #9BA3AE;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    .footer-col { display: flex; flex-direction: column; gap: 8px; }
+    .footer-col a {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      color: #9BA3AE;
+    }
+    .footer-bottom {
+      padding: 16px 64px;
+      border-top: 1px solid #2A2F37;
+    }
+    .footer-copyright {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      color: #9BA3AE;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav { padding: 0 20px; }
+      .btn-nav-call { display: none; }
+      .hero { padding: 80px 20px 40px; }
+      .hero-headline { font-size: 48px; }
+      .consult { padding: 32px 20px; }
+      .consult-inner { grid-template-columns: 1fr; }
+      .consult-row { grid-template-columns: 1fr; }
+      .content-section, .content-section-alt { padding: 40px 20px; }
+      .two-col { grid-template-columns: 1fr; gap: 32px; }
+      .benefits-grid { grid-template-columns: 1fr; }
+      .partners { padding: 40px 20px; }
+      .footer-inner { grid-template-columns: 1fr; padding: 24px 20px; }
+      .footer-bottom { padding: 12px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html"><img class="nav-logo" src="logo.png" alt="Zeus Performance"></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <div class="nav-dropdown">
+        <a href="services.html" class="nav-dropdown-trigger active">Services <span class="nav-dropdown-arrow">▾</span></a>
+        <div class="nav-dropdown-menu">
+          <a href="services.html">Dyno Tuning Services</a>
+          <a href="ecu-bench-unlock.html">ECU Bench Unlock Service</a>
+          <a href="general-repair.html">General Repair &amp; Maintenance Services</a>
+          <a href="performance-upgrades.html">Performance Upgrade Services</a>
+          <a href="suspension-upgrades.html">Suspension Upgrade Services</a>
+          <a href="wheels-tires.html">Wheels &amp; Tires Services</a>
+        </div>
+      </div>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <a class="btn-nav-call" href="tel:+19788530384">Call Now</a>
+      <a class="btn-nav-quote" href="contact.html">Get a Free Quote</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <p class="hero-label">Precision Calibration</p>
+    <h1 class="hero-headline">Dyno Tuning</h1>
+    <p class="hero-body">Unleash the true potential of your machine. Our state-of-the-art dynamometer tuning facility provides microscopic adjustments to fuel, ignition, and boost maps. We don&rsquo;t just chase peak horsepower; we engineer a broader powerband, crystalline throttle response, and uncompromised drivability.</p>
+    <a class="btn-schedule" href="https://app.shopmonkey.cloud/public/quote-request/f6365a96-00fc-4b85-8c5a-18ba34e62d28" target="_blank">
+      <svg class="icon-calendar" viewBox="0 0 14 14" fill="none" stroke="#10A0F0" stroke-width="1.3">
+        <rect x="1" y="2" width="12" height="11" rx="1"/>
+        <path d="M1 6h12M4 1v2M10 1v2"/>
+      </svg>
+      Schedule a Session
+    </a>
+  </section>
+
+
+  <!-- UNLOCK + WHAT IS DYNO TUNING -->
+  <section class="content-section">
+    <h2 class="section-heading">Unlock Your Vehicle&rsquo;s True Potential</h2>
+    <p class="section-body">At Zeus Performance, we believe every car has hidden potential waiting to be unleashed. Our state-of-the-art Dyno Tuning service is designed to optimize your vehicle&rsquo;s performance, delivering enhanced horsepower, torque, and overall drivability.</p>
+    <div class="two-col">
+      <div>
+        <p class="section-heading-blue">What Is Dyno Tuning?</p>
+        <p class="section-body">Dyno tuning involves adjusting your vehicle&rsquo;s engine parameters to achieve peak performance. Using advanced dynamometer technology, we analyze your car&rsquo;s performance under real-world conditions and fine-tune it to deliver optimal power, efficiency, and responsiveness.</p>
+      </div>
+      <div>
+        <p class="section-heading-blue">Why Choose Zeus Performance?</p>
+        <ul class="bullet-list">
+          <li><strong>Precision Tuning:</strong> Our expert technicians use the latest equipment to provide precise adjustments for your vehicle&rsquo;s engine.</li>
+          <li><strong>Custom Solutions:</strong> Whether maximizing fuel efficiency, boosting street power, or fine-tuning for track performance — we tailor every tune to your specific needs.</li>
+          <li><strong>Advanced Equipment:</strong> Our dyno room is equipped with industry-leading tools to ensure accurate measurements and reliable results.</li>
+          <li><strong>Experience You Can Trust:</strong> With years of experience in automotive performance, our team delivers results you can feel on the road or track.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUR PROCESS -->
+  <section class="content-section-alt">
+    <p class="section-heading-blue">Our Process</p>
+    <ol class="steps-list">
+      <li><span class="step-num">1</span><strong>Initial Consultation:</strong> We start by understanding your performance goals.</li>
+      <li><span class="step-num">2</span><strong>Baseline Run:</strong> Your vehicle undergoes an initial dyno run to establish baseline performance data.</li>
+      <li><span class="step-num">3</span><strong>Tuning Adjustments:</strong> We meticulously adjust engine parameters, including air-fuel ratio, ignition timing, and boost levels if applicable.</li>
+      <li><span class="step-num">4</span><strong>Performance Testing:</strong> After tuning, we perform multiple runs to validate improvements and ensure consistency.</li>
+      <li><span class="step-num">5</span><strong>Final Report:</strong> You&rsquo;ll receive a detailed report showing performance gains and the adjustments made.</li>
+    </ol>
+  </section>
+
+  <!-- BENEFITS -->
+  <section class="content-section">
+    <p class="section-heading-blue">Benefits of Dyno Tuning</p>
+    <div class="benefits-grid">
+      <div class="benefit-item"><span class="benefit-check">&#10003;</span><span class="benefit-text">Increased horsepower and torque</span></div>
+      <div class="benefit-item"><span class="benefit-check">&#10003;</span><span class="benefit-text">Improved throttle response</span></div>
+      <div class="benefit-item"><span class="benefit-check">&#10003;</span><span class="benefit-text">Enhanced fuel efficiency</span></div>
+      <div class="benefit-item"><span class="benefit-check">&#10003;</span><span class="benefit-text">Smoother power delivery</span></div>
+      <div class="benefit-item"><span class="benefit-check">&#10003;</span><span class="benefit-text">Engine longevity through optimized performance</span></div>
+    </div>
+  </section>
+
+  <!-- PARTNERS + CTA -->
+  <section class="partners">
+    <h2 class="section-heading" style="-webkit-text-fill-color:unset; background:none; color:#FFFFFF;">Get Ready to Unleash the Beast</h2>
+    <p class="partners-body">Don&rsquo;t let untapped potential sit under your hood. Experience the difference with Zeus Performance&rsquo;s professional Dyno Tuning services. Contact us today to schedule an appointment and elevate your driving experience to legendary status.</p>
+    <div class="partners-row">
+      <span class="partner-badge">MHD</span>
+      <span class="partner-sep">·</span>
+      <span class="partner-badge">xAutomotive</span>
+      <span class="partner-sep">·</span>
+      <span class="partner-badge">EcuTek</span>
+      <span class="partner-sep">·</span>
+      <span style="font-family:'Inter',sans-serif; font-size:13px; color:#9BA3AE;">and more!</span>
+    </div>
+    <p class="cta-note">Call us today or visit our workshop to get started!</p>
+    <a class="btn-cta" href="tel:+19788530384">Call (978) 853-0384</a>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-divider"></div>
+    <div class="footer-inner">
+      <div>
+        <img class="footer-logo" src="logo.png" alt="Zeus Performance">
+        <p class="footer-tagline">Machined Precision.</p>
+      </div>
+      <div class="footer-col">
+        <a href="services.html">Services</a>
+        <a href="#">Tuning</a>
+        <a href="#">Maintenance</a>
+      </div>
+      <div class="footer-col">
+        <a href="#">Diagnostics</a>
+        <a href="#">Hours</a>
+        <a href="#">Location</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copyright">&copy; 2026 Zeus Performance. Machined Precision.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
