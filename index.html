@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zeus Performance — Unleash Your Vehicle's Full Potential</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,700;1,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0B0D10; color: #FFFFFF; font-family: 'Inter', sans-serif; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; }
+
+    /* ── NAVBAR ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      height: 56px;
+      background: #0B0D10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+    }
+    .nav-logo { height: 36px; }
+    .nav-links {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav-links a {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #FFFFFF;
+    }
+    .nav-links a.active {
+      border-bottom: 2px solid #10A0F0;
+      padding-bottom: 2px;
+    }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-trigger { display: flex; align-items: center; gap: 5px; cursor: pointer; }
+    .nav-dropdown-arrow { font-size: 8px; opacity: 0.7; }
+    .nav-dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0B0D10;
+      border: 1px solid #2A2F37;
+      border-radius: 4px;
+      min-width: 270px;
+      padding-top: 10px;
+      z-index: 1001;
+    }
+    .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+    .nav-dropdown-menu a {
+      display: block;
+      padding: 13px 20px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      color: #FFFFFF;
+      text-transform: none;
+      letter-spacing: normal;
+      border-bottom: 1px solid #2A2F37;
+    }
+    .nav-dropdown-menu a:last-child { border-bottom: none; }
+    .nav-dropdown-menu a:hover { background: #10A0F0; color: #FFFFFF; }
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .btn-nav-call {
+      border: 1px solid #FFFFFF;
+      background: transparent;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      padding: 8px 20px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+    .btn-nav-quote {
+      background: #10A0F0;
+      border: none;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      padding: 8px 20px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 520px;
+      background-image:
+        linear-gradient(rgba(11,13,16,0.65), rgba(11,13,16,0.65)),
+        url('https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1400');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 120px;
+      padding-bottom: 60px;
+      padding-left: 20px;
+      padding-right: 20px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero-label {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #FFFFFF;
+      margin-bottom: 16px;
+    }
+    .hero-label .bullet { color: #F70902; }
+    .hero-headline {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-style: italic;
+      font-weight: 800;
+      font-size: 72px;
+      line-height: 0.92;
+      text-transform: uppercase;
+      background: linear-gradient(180deg, #FFFFFF 0%, #EBEBEB 12%, #FFFFFF 26%, #B4B4B4 44%, #FFFFFF 58%, #909090 72%, #D8D8D8 86%, #FFFFFF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 20px;
+    }
+    .hero-sub {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      color: #9BA3AE;
+      max-width: 420px;
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-hero-quote {
+      border: 1.5px solid #10A0F0;
+      background: linear-gradient(135deg, #10A0F0, #0A4DA8);
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 12px 28px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+    .btn-hero-call {
+      border: 1.5px solid rgba(255,255,255,0.35);
+      background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 12px 28px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    /* ── INSTAGRAM STRIP ── */
+    .instagram-strip {
+      background: #0B0D10;
+      padding: 28px 0;
+      text-align: center;
+    }
+    .btn-instagram {
+      border: 1.5px solid #10A0F0;
+      background: linear-gradient(135deg, #10A0F0, #0A4DA8);
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 12px 36px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    /* ── REVIEWS ── */
+    .reviews {
+      background: #0B0D10;
+      padding: 48px 64px;
+    }
+    .reviews-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .reviews-heading {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-style: italic;
+      font-weight: 800;
+      font-size: 42px;
+      text-transform: uppercase;
+      background: linear-gradient(180deg, #FFFFFF 0%, #EBEBEB 12%, #FFFFFF 26%, #B4B4B4 44%, #FFFFFF 58%, #909090 72%, #D8D8D8 86%, #FFFFFF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .reviews-meta {
+      display: flex;
+      align-items: center;
+      margin-top: 6px;
+    }
+    .stars { color: #F5A623; font-size: 16px; }
+    .reviews-count {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      color: #9BA3AE;
+      margin-left: 6px;
+    }
+    .reviews-actions { display: flex; gap: 8px; }
+    .btn-reviews {
+      border: 1px solid #FFFFFF;
+      background: transparent;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .review-card {
+      background: #181C22;
+      border: 1px solid #2A2F37;
+      border-radius: 8px;
+      padding: 20px;
+    }
+    .review-stars { color: #F5A623; font-size: 14px; }
+    .review-quote {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      color: #D1D5DB;
+      line-height: 1.6;
+      margin-top: 12px;
+    }
+    .review-name {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      color: #10A0F0;
+      margin-top: 16px;
+    }
+
+    /* ── FOOTER ── */
+    .footer { background: #000000; }
+    .footer-divider {
+      height: 3px;
+      background: linear-gradient(90deg, #FAC309, #FB4102, #F70902);
+    }
+    .footer-inner {
+      padding: 32px 64px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 32px;
+    }
+    .footer-logo { height: 36px; margin-bottom: 8px; }
+    .footer-tagline {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      color: #9BA3AE;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .footer-col a {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      color: #9BA3AE;
+    }
+    .footer-bottom {
+      padding: 16px 64px;
+      border-top: 1px solid #2A2F37;
+    }
+    .footer-copyright {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      color: #9BA3AE;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav { padding: 0 20px; }
+      .btn-nav-call { display: none; }
+      .hero { padding-top: 80px; }
+      .hero-headline { font-size: 48px; }
+      .reviews { padding: 32px 20px; }
+      .reviews-top { flex-direction: column; gap: 16px; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; padding: 24px 20px; }
+      .footer-bottom { padding: 12px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html"><img class="nav-logo" src="logo.png" alt="Zeus Performance"></a>
+    <div class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <div class="nav-dropdown">
+        <a href="services.html" class="nav-dropdown-trigger">Services <span class="nav-dropdown-arrow">▾</span></a>
+        <div class="nav-dropdown-menu">
+          <a href="services.html">Dyno Tuning Services</a>
+          <a href="ecu-bench-unlock.html">ECU Bench Unlock Service</a>
+          <a href="general-repair.html">General Repair &amp; Maintenance Services</a>
+          <a href="performance-upgrades.html">Performance Upgrade Services</a>
+          <a href="suspension-upgrades.html">Suspension Upgrade Services</a>
+          <a href="wheels-tires.html">Wheels &amp; Tires Services</a>
+        </div>
+      </div>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <a class="btn-nav-call" href="tel:+19788530384">Call Now</a>
+      <a class="btn-nav-quote" href="contact.html">Get a Free Quote</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <p class="hero-label"><span class="bullet">•</span> Precision Tuning &amp; Performance</p>
+    <h1 class="hero-headline">
+      Unleash Your<br>
+      <span class="chrome">Vehicle's Full</span><br>
+      Potential
+    </h1>
+    <p class="hero-sub">Expert dyno tuning, ECU mapping, and premium performance upgrades for luxury and sports vehicles. Machined precision for the street and the track.</p>
+    <div class="hero-buttons">
+      <a class="btn-hero-quote" href="contact.html">Get a Free Quote &rarr;</a>
+      <a class="btn-hero-call" href="tel:+19788530384">Call (978) 853-0384</a>
+    </div>
+  </section>
+
+  <section class="instagram-strip">
+    <a class="btn-instagram" href="https://www.instagram.com/zeusperformancellc/" target="_blank">Follow Us on Instagram</a>
+  </section>
+
+  <section class="reviews">
+    <div class="reviews-top">
+      <div>
+        <h2 class="reviews-heading">What Our Customers Say</h2>
+        <div class="reviews-meta">
+          <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <span class="reviews-count">4.8 based on 78 Google reviews</span>
+        </div>
+      </div>
+      <div class="reviews-actions">
+        <a class="btn-reviews" href="https://www.google.com/maps/place/?q=place_id:ChIJ_ZDqT-Th4okR2heDI2tT_fM" target="_blank">Read All Reviews</a>
+        <a class="btn-reviews" href="https://search.google.com/local/writereview?placeid=ChIJ_ZDqT-Th4okR2heDI2tT_fM" target="_blank">Leave a Review</a>
+      </div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="review-quote">&ldquo;Anthony and Quen were incredibly professional, on top of communication the whole time, and super quick on the return. You have a return customer for life!&rdquo;</p>
+        <p class="review-name">Sofian B.</p>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="review-quote">&ldquo;Anthony genuinely cares about your vehicle. Fair pricing, thorough explanations at every step &mdash; I&rsquo;ve finally found my long-term trusted mechanic.&rdquo;</p>
+        <p class="review-name">Kevin C.</p>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="review-quote">&ldquo;Great job on my long tube headers and O2 sensor. They kept me updated on everything, answered every question, and made sure I walked out a happy customer.&rdquo;</p>
+        <p class="review-name">Jose B.</p>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="review-quote">&ldquo;Great place, reasonably priced, with a very respectable and friendly staff. Called after 2pm, they took my car immediately and fixed it same day. Highly recommend!&rdquo;</p>
+        <p class="review-name">Kathryn T.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-divider"></div>
+    <div class="footer-inner">
+      <div>
+        <img class="footer-logo" src="logo.png" alt="Zeus Performance">
+        <p class="footer-tagline">Machined Precision.</p>
+      </div>
+      <div class="footer-col">
+        <a href="services.html">Services</a>
+        <a href="#">Tuning</a>
+        <a href="#">Maintenance</a>
+      </div>
+      <div class="footer-col">
+        <a href="#">Diagnostics</a>
+        <a href="#">Hours</a>
+        <a href="#">Location</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copyright">&copy; 2026 Zeus Performance. Machined Precision.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

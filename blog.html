@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Performance Blog — Zeus Performance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,700;1,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0B0D10; color: #FFFFFF; font-family: 'Inter', sans-serif; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; }
+
+    /* ── NAVBAR ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      height: 56px;
+      background: #0B0D10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+    }
+    .nav-logo { height: 36px; }
+    .nav-links {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav-links a {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #FFFFFF;
+    }
+    .nav-links a.active {
+      border-bottom: 2px solid #10A0F0;
+      padding-bottom: 2px;
+    }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-trigger { display: flex; align-items: center; gap: 5px; cursor: pointer; }
+    .nav-dropdown-arrow { font-size: 8px; opacity: 0.7; }
+    .nav-dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0B0D10;
+      border: 1px solid #2A2F37;
+      border-radius: 4px;
+      min-width: 270px;
+      padding-top: 10px;
+      z-index: 1001;
+    }
+    .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+    .nav-dropdown-menu a {
+      display: block;
+      padding: 13px 20px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      color: #FFFFFF;
+      text-transform: none;
+      letter-spacing: normal;
+      border-bottom: 1px solid #2A2F37;
+    }
+    .nav-dropdown-menu a:last-child { border-bottom: none; }
+    .nav-dropdown-menu a:hover { background: #10A0F0; color: #FFFFFF; }
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .btn-nav-call {
+      border: 1px solid #FFFFFF;
+      background: transparent;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      padding: 8px 20px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+    .btn-nav-quote {
+      background: #10A0F0;
+      border: none;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      padding: 8px 20px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    /* ── BLOG HERO ── */
+    .blog-hero {
+      background: #0B0D10;
+      padding: 80px 64px 0;
+      text-align: center;
+    }
+    .blog-hero-heading {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-style: italic;
+      font-weight: 800;
+      font-size: 64px;
+      text-transform: uppercase;
+      background: linear-gradient(180deg, #FFFFFF 0%, #EBEBEB 12%, #FFFFFF 26%, #B4B4B4 44%, #FFFFFF 58%, #909090 72%, #D8D8D8 86%, #FFFFFF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .blog-hero-sub {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      color: #9BA3AE;
+      max-width: 420px;
+      margin: 16px auto 0;
+      line-height: 1.6;
+    }
+    .blog-hero-divider {
+      width: 100%;
+      height: 1px;
+      background: #FB4102;
+      margin-top: 40px;
+    }
+
+    /* ── BLOG CARDS ── */
+    .blog-cards { background: #0B0D10; padding: 48px 64px; }
+    .blog-grid { display: flex; flex-direction: column; gap: 24px; }
+
+    .blog-card {
+      background: #181C22;
+      border: 1px solid #2A2F37;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .blog-card-top {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+    }
+    .blog-card-img {
+      width: 280px;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+    .blog-card-body { padding: 24px 28px; }
+    .blog-card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .blog-card-tag {
+      background: #10A0F0;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 3px 10px;
+      border-radius: 2px;
+    }
+    .blog-card-meta {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: #9BA3AE;
+    }
+    .blog-card-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-style: italic;
+      font-weight: 800;
+      font-size: 22px;
+      text-transform: uppercase;
+      background: linear-gradient(180deg, #FFFFFF 0%, #EBEBEB 12%, #FFFFFF 26%, #B4B4B4 44%, #FFFFFF 58%, #909090 72%, #D8D8D8 86%, #FFFFFF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+    .blog-card-excerpt {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      color: #9BA3AE;
+      line-height: 1.7;
+    }
+
+    /* ── EXPAND (details/summary) ── */
+    .blog-expand {
+      border-top: 1px solid #2A2F37;
+    }
+    .blog-expand summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 14px 28px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #10A0F0;
+      user-select: none;
+    }
+    .blog-expand summary::-webkit-details-marker { display: none; }
+    .blog-expand summary::after { content: ' ↓'; }
+    .blog-expand[open] summary::after { content: ' ↑'; }
+    .blog-expand[open] summary { border-bottom: 1px solid #2A2F37; }
+
+    .article-body {
+      padding: 32px 28px 36px;
+      max-width: 780px;
+    }
+    .article-body h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-style: italic;
+      font-weight: 800;
+      font-size: 22px;
+      text-transform: uppercase;
+      color: #10A0F0;
+      margin-top: 28px;
+      margin-bottom: 10px;
+    }
+    .article-body h2:first-child { margin-top: 0; }
+    .article-body p {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: #9BA3AE;
+      line-height: 1.8;
+      margin-bottom: 12px;
+    }
+    .article-body p strong { color: #FFFFFF; }
+    .article-body ul, .article-body ol {
+      padding-left: 0;
+      list-style: none;
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .article-body ul li, .article-body ol li {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: #9BA3AE;
+      line-height: 1.6;
+      padding-left: 20px;
+      position: relative;
+    }
+    .article-body ul li::before { content: '•'; color: #10A0F0; position: absolute; left: 0; }
+    .article-body ol { counter-reset: article-counter; }
+    .article-body ol li { counter-increment: article-counter; padding-left: 28px; }
+    .article-body ol li::before {
+      content: counter(article-counter) '.';
+      color: #10A0F0;
+      font-weight: 700;
+      position: absolute;
+      left: 0;
+    }
+    .article-body li strong { color: #FFFFFF; }
+    .article-note {
+      background: #0B0D10;
+      border-left: 3px solid #10A0F0;
+      padding: 12px 16px;
+      border-radius: 0 4px 4px 0;
+      margin-top: 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: #9BA3AE;
+    }
+
+    /* ── SUBSCRIBE ── */
+    .subscribe {
+      background: #0B0D10;
+      padding: 64px;
+      text-align: center;
+    }
+    .subscribe-heading {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-style: italic;
+      font-weight: 800;
+      font-size: 36px;
+      text-transform: uppercase;
+      color: #FFFFFF;
+    }
+    .subscribe-sub {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      color: #9BA3AE;
+      margin: 12px auto 28px;
+      line-height: 1.6;
+    }
+    .subscribe-form {
+      display: flex;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .subscribe-input {
+      flex: 1;
+      background: #181C22;
+      border: 1px solid #2A2F37;
+      border-right: none;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      padding: 12px 20px;
+      border-radius: 4px 0 0 4px;
+      outline: none;
+    }
+    .subscribe-input::placeholder { color: #9BA3AE; }
+    .subscribe-btn {
+      background: #10A0F0;
+      border: none;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      text-transform: uppercase;
+      padding: 12px 24px;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    /* ── FOOTER ── */
+    .footer { background: #000000; }
+    .footer-divider {
+      height: 3px;
+      background: linear-gradient(90deg, #FAC309, #FB4102, #F70902);
+    }
+    .footer-inner {
+      padding: 32px 64px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 32px;
+    }
+    .footer-logo { height: 36px; margin-bottom: 8px; }
+    .footer-tagline {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      color: #9BA3AE;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    .footer-col { display: flex; flex-direction: column; gap: 8px; }
+    .footer-col a {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      color: #9BA3AE;
+    }
+    .footer-bottom {
+      padding: 16px 64px;
+      border-top: 1px solid #2A2F37;
+    }
+    .footer-copyright {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      color: #9BA3AE;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav { padding: 0 20px; }
+      .btn-nav-call { display: none; }
+      .blog-hero { padding: 48px 20px 0; }
+      .blog-hero-heading { font-size: 40px; }
+      .blog-cards { padding: 32px 20px; }
+      .blog-card-top { grid-template-columns: 1fr; }
+      .blog-card-img { width: 100%; height: 180px; }
+      .blog-card-body { padding: 16px 20px; }
+      .article-body { padding: 20px; }
+      .subscribe { padding: 40px 20px; }
+      .subscribe-form { flex-direction: column; }
+      .subscribe-input { border-right: 1px solid #2A2F37; border-radius: 4px; }
+      .subscribe-btn { border-radius: 4px; margin-top: 8px; }
+      .footer-inner { grid-template-columns: 1fr; padding: 24px 20px; }
+      .footer-bottom { padding: 12px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html"><img class="nav-logo" src="logo.png" alt="Zeus Performance"></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <div class="nav-dropdown">
+        <a href="services.html" class="nav-dropdown-trigger">Services <span class="nav-dropdown-arrow">▾</span></a>
+        <div class="nav-dropdown-menu">
+          <a href="services.html">Dyno Tuning Services</a>
+          <a href="ecu-bench-unlock.html">ECU Bench Unlock Service</a>
+          <a href="general-repair.html">General Repair &amp; Maintenance Services</a>
+          <a href="performance-upgrades.html">Performance Upgrade Services</a>
+          <a href="suspension-upgrades.html">Suspension Upgrade Services</a>
+          <a href="wheels-tires.html">Wheels &amp; Tires Services</a>
+        </div>
+      </div>
+      <a href="blog.html" class="active">Blog</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <a class="btn-nav-call" href="tel:+19788530384">Call Now</a>
+      <a class="btn-nav-quote" href="contact.html">Get a Free Quote</a>
+    </div>
+  </nav>
+
+  <section class="blog-hero">
+    <h1 class="blog-hero-heading">The Performance Blog</h1>
+    <p class="blog-hero-sub">Insights, tuning tips, and the latest from the world of high-performance automotive engineering. Precision crafted knowledge for the obsessed.</p>
+    <div class="blog-hero-divider"></div>
+  </section>
+
+  <section class="blog-cards">
+    <div class="blog-grid">
+
+      <!-- POST 1: VEHICLE MAINTENANCE -->
+      <div class="blog-card">
+        <div class="blog-card-top">
+          <img class="blog-card-img" src="https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?w=600" alt="Vehicle Maintenance">
+          <div class="blog-card-body">
+            <div class="blog-card-header">
+              <span class="blog-card-tag">Vehicle Maintenance</span>
+              <span class="blog-card-meta">October 14, 2025</span>
+            </div>
+            <p class="blog-card-title">Vehicle Maintenance Newbury MA &mdash; Save 10% on Services at Zeus Performance</p>
+            <p class="blog-card-excerpt">Keeping your vehicle in top condition is essential for safety, performance, and longevity. Regular maintenance helps prevent costly repairs and ensures your car runs efficiently &mdash; and right now we&rsquo;re offering 10% off all maintenance services.</p>
+          </div>
+        </div>
+        <details class="blog-expand">
+          <summary>Read Full Article</summary>
+          <div class="article-body">
+            <h2>Reliable Car Care in Newbury, MA</h2>
+            <p>Keeping your vehicle in top condition is essential for safety, performance, and longevity. Regular vehicle maintenance in Newbury MA helps prevent costly repairs, ensures your car runs efficiently, and gives you peace of mind on the road. At Zeus Performance, we&rsquo;re proud to offer a limited-time <strong>10% discount on all maintenance services</strong>, making it easier and more affordable to take care of your vehicle.</p>
+            <h2>Essential Auto Maintenance Services</h2>
+            <p>Our maintenance services cover everything your car needs to stay in peak condition:</p>
+            <ul>
+              <li><strong>Oil Changes &amp; Filter Replacements</strong> to keep your engine running smoothly</li>
+              <li><strong>Brake Inspections &amp; Repairs</strong> for safety and stopping power</li>
+              <li><strong>Fluid Checks &amp; Flushes</strong> for transmission, coolant, and more</li>
+              <li><strong>Tire Rotations &amp; Alignment Checks</strong> to extend tire life and improve handling</li>
+              <li><strong>Comprehensive Vehicle Health Inspections</strong> to catch problems before they become serious</li>
+            </ul>
+            <p>Routine maintenance not only improves your vehicle&rsquo;s reliability but also boosts fuel efficiency and protects your investment.</p>
+            <h2>Why Choose Zeus Performance</h2>
+            <p>At Zeus Performance, our certified technicians bring years of experience and a commitment to quality. We use high-quality parts, provide honest recommendations, and treat every car as if it were our own. Whether you drive a daily commuter, a family SUV, or a performance vehicle, our team has the expertise to keep it performing at its best.</p>
+            <div class="article-note">Save 10% on all maintenance services — contact us today to schedule your appointment.</div>
+          </div>
+        </details>
+      </div>
+
+      <!-- POST 2: ECU BENCH UNLOCKING -->
+      <div class="blog-card">
+        <div class="blog-card-top">
+          <img class="blog-card-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600" alt="ECU Bench Unlock">
+          <div class="blog-card-body">
+            <div class="blog-card-header">
+              <span class="blog-card-tag">Bench Unlock</span>
+              <span class="blog-card-meta">June 16, 2025</span>
+            </div>
+            <p class="blog-card-title">The Power of ECU Bench Unlocking &mdash; Why In-House Service Makes All the Difference</p>
+            <p class="blog-card-excerpt">When it comes to performance tuning, one of the most essential first steps is unlocking the ECU. At Zeus Performance, we offer in-house ECU bench unlocking &mdash; a powerful solution that opens the door to serious performance gains.</p>
+          </div>
+        </div>
+        <details class="blog-expand">
+          <summary>Read Full Article</summary>
+          <div class="article-body">
+            <h2>What Is ECU Bench Unlocking?</h2>
+            <p>Every modern vehicle comes equipped with an ECU &mdash; the &ldquo;brain&rdquo; that manages your engine&rsquo;s functions. From air-fuel ratios to turbo boost levels, it controls critical performance parameters. Manufacturers often lock ECUs to prevent unauthorized tuning or modifications.</p>
+            <p>Bench unlocking involves removing the ECU from the vehicle and connecting it to professional-grade hardware and software on a test bench. This allows deep access that isn&rsquo;t possible through standard OBD ports. Once unlocked, your ECU can be tuned, cloned, or modified to suit your performance goals.</p>
+            <h2>Why Choose In-House Over Mail-In?</h2>
+            <ul>
+              <li><strong>Precision and Safety</strong> &mdash; Our in-house service ensures your ECU is in the hands of trained professionals using ESD-safe environments and the latest tools. No shipping damage. No guesswork.</li>
+              <li><strong>Immediate Results</strong> &mdash; No waiting for shipping or third-party turnaround &mdash; often same-day results depending on your ECU type.</li>
+              <li><strong>Direct Support</strong> &mdash; Want a tune immediately after unlock? Our in-house model allows face-to-face consultation and a streamlined process from unlock to tune.</li>
+            </ul>
+            <h2>What Can You Do After a Bench Unlock?</h2>
+            <ul>
+              <li>Custom Tuning &mdash; Stage 1, 2, or 3 performance upgrades</li>
+              <li>ECU/TCU Cloning &mdash; Perfect for engine swaps or replacement</li>
+              <li>Immobilizer Modification &mdash; Match new components to your car</li>
+              <li>Advanced Diagnostics &mdash; Deeper logging and error tracking</li>
+              <li>Removal of Factory Limitations &mdash; Unlock features restricted by the manufacturer</li>
+            </ul>
+            <h2>Is Your Vehicle Eligible?</h2>
+            <p>At Zeus Performance, we support a wide range of ECUs &mdash; from German and Italian performance brands to domestic and JDM vehicles. If you&rsquo;re not sure whether your ECU qualifies, reach out with your year, make, and model.</p>
+            <div class="article-note">This is an in-house only service. No mail-ins accepted. Contact Zeus Performance today to schedule your ECU bench unlock.</div>
+          </div>
+        </details>
+      </div>
+
+      <!-- POST 3: PPF -->
+      <div class="blog-card">
+        <div class="blog-card-top">
+          <img class="blog-card-img" src="paint-protective-film-ppf-zeus-performance-scaled.jpg" alt="Paint Protection Film">
+          <div class="blog-card-body">
+            <div class="blog-card-header">
+              <span class="blog-card-tag">PPF</span>
+              <span class="blog-card-meta">June 16, 2025</span>
+            </div>
+            <p class="blog-card-title">The Benefits of Paint Protection Film (PPF): Is It Worth It?</p>
+            <p class="blog-card-excerpt">Your car is more than just a mode of transportation &mdash; it&rsquo;s an investment, a passion, and for many, a reflection of personal style. One of the best ways to maintain your car&rsquo;s flawless finish is with Paint Protection Film.</p>
+          </div>
+        </div>
+        <details class="blog-expand">
+          <summary>Read Full Article</summary>
+          <div class="article-body">
+            <h2>What Is Paint Protection Film?</h2>
+            <p>Paint Protection Film (PPF), sometimes referred to as &ldquo;clear bra,&rdquo; is a transparent, durable urethane material applied to the painted surfaces of a vehicle. It&rsquo;s designed to shield your paint job from physical damage, UV rays, and environmental contaminants while remaining nearly invisible.</p>
+            <h2>Top Benefits of PPF</h2>
+            <ol>
+              <li><strong>Protection Against Scratches and Chips</strong> &mdash; Road debris, gravel, sand, and salt can cause chips and scratches that lead to rust or costly repairs. PPF acts as a barrier, absorbing the impact and keeping your paint pristine.</li>
+              <li><strong>Self-Healing Technology</strong> &mdash; Many high-quality PPFs feature self-healing properties. Minor scratches and swirl marks can disappear with heat from the sun or a warm water rinse.</li>
+              <li><strong>UV and Oxidation Resistance</strong> &mdash; UV rays can fade and oxidize your car&rsquo;s paint over time. PPF offers excellent UV resistance, helping your car retain its vibrant color and showroom shine for years.</li>
+              <li><strong>Stain and Chemical Protection</strong> &mdash; Bird droppings, bug splatter, tree sap, and road tar can etch into your paint. PPF acts as a sacrificial layer, resisting chemical stains.</li>
+              <li><strong>Enhances Resale Value</strong> &mdash; A well-maintained paint job significantly boosts your car&rsquo;s resale value. PPF keeps the exterior in like-new condition.</li>
+              <li><strong>Low Maintenance</strong> &mdash; With PPF, you won&rsquo;t need to wax as often, and washing becomes easier. Dirt and debris have a harder time sticking to the surface.</li>
+              <li><strong>Invisible Defense</strong> &mdash; Unlike bulky car bras or visible coatings, PPF is virtually undetectable. It preserves the original look of your vehicle while providing heavy-duty protection.</li>
+            </ol>
+            <h2>Where Should You Apply PPF?</h2>
+            <p>While you can cover your entire vehicle, most owners opt for high-impact areas:</p>
+            <ul>
+              <li>Front bumper</li>
+              <li>Hood and fenders</li>
+              <li>Side mirrors</li>
+              <li>Door edges and handle cups</li>
+              <li>Rocker panels</li>
+            </ul>
+            <h2>Is PPF Worth the Investment?</h2>
+            <p>While it may seem like a luxury, PPF can save you money in the long run by reducing the need for paint correction, touch-ups, or full repaints. Plus, it provides peace of mind knowing your car is protected from the elements and everyday wear and tear. The benefits of paint protection film pay dividends.</p>
+          </div>
+        </details>
+      </div>
+
+      <!-- POST 4: DYNO TUNING -->
+      <div class="blog-card">
+        <div class="blog-card-top">
+          <img class="blog-card-img" src="sport-cars-parade-race-highway-scaled.jpg" alt="Dyno Tuning">
+          <div class="blog-card-body">
+            <div class="blog-card-header">
+              <span class="blog-card-tag">Dyno Tuning</span>
+              <span class="blog-card-meta">April 16, 2025</span>
+            </div>
+            <p class="blog-card-title">The Ultimate Guide to Dyno Tuning</p>
+            <p class="blog-card-excerpt">If you&rsquo;re looking to unlock the full potential of your vehicle, dyno tuning is a crucial step. This precise process enhances horsepower, torque, fuel efficiency, and overall drivability.</p>
+          </div>
+        </div>
+        <details class="blog-expand">
+          <summary>Read Full Article</summary>
+          <div class="article-body">
+            <h2>What Is Dyno Tuning?</h2>
+            <p>Dyno tuning involves using a dynamometer to measure a car&rsquo;s performance under controlled conditions. The data collected helps adjust various engine parameters &mdash; such as air-fuel ratio, ignition timing, and boost pressure &mdash; to achieve optimal performance.</p>
+            <h2>Benefits of Dyno Tuning</h2>
+            <ul>
+              <li><strong>Increased Horsepower and Torque</strong> &mdash; Fine-tuning your engine&rsquo;s parameters unlocks additional power that standard factory settings leave untapped.</li>
+              <li><strong>Improved Fuel Efficiency</strong> &mdash; A well-tuned engine runs more efficiently, consuming less fuel while delivering better performance.</li>
+              <li><strong>Better Throttle Response</strong> &mdash; Dyno tuning enhances the responsiveness of your throttle, making acceleration more immediate and smoother.</li>
+              <li><strong>Enhanced Engine Longevity</strong> &mdash; Properly adjusted engine settings reduce unnecessary strain on components, extending your engine&rsquo;s lifespan.</li>
+              <li><strong>Customized Performance</strong> &mdash; Whether you want more power for the track or efficiency for daily driving, dyno tuning tailors your car&rsquo;s performance to your needs.</li>
+            </ul>
+            <h2>The Dyno Tuning Process</h2>
+            <ol>
+              <li><strong>Initial Vehicle Assessment</strong> &mdash; Inspect and assess the engine&rsquo;s condition to ensure it&rsquo;s safe for tuning.</li>
+              <li><strong>Baseline Dyno Run</strong> &mdash; Perform a baseline test to measure current performance and identify areas for improvement.</li>
+              <li><strong>Performance Adjustments</strong> &mdash; Adjust parameters such as fuel delivery, ignition timing, and turbo boost levels.</li>
+              <li><strong>Testing and Validation</strong> &mdash; Conduct multiple dyno runs to validate the changes and ensure consistent performance.</li>
+              <li><strong>Final Review and Report</strong> &mdash; Provide a detailed report outlining performance improvements and future maintenance tips.</li>
+            </ol>
+            <h2>Dyno Tuning Myths Debunked</h2>
+            <ul>
+              <li><strong>Myth: It&rsquo;s Only for Race Cars</strong> &mdash; Dyno tuning benefits any vehicle by improving efficiency, responsiveness, and reliability.</li>
+              <li><strong>Myth: It Can Damage Your Engine</strong> &mdash; Professional dyno tuning is safe and focuses on optimizing performance without compromising engine integrity.</li>
+              <li><strong>Myth: Factory Settings Are Always Best</strong> &mdash; Factory settings are generalized for mass production, whereas dyno tuning personalizes performance for your unique driving style.</li>
+            </ul>
+            <h2>Why Choose Zeus Performance?</h2>
+            <ul>
+              <li><strong>Experienced Technicians</strong> with years of expertise across various makes and models</li>
+              <li><strong>State-of-the-Art Equipment</strong> for accurate, reliable results</li>
+              <li><strong>Custom Solutions</strong> tailored to your performance goals</li>
+              <li><strong>Proven Track Record</strong> from daily drivers to track-ready machines</li>
+            </ul>
+            <div class="article-note">Contact Zeus Performance today to schedule a dyno tuning session and experience the difference precision tuning can make.</div>
+          </div>
+        </details>
+      </div>
+
+      <!-- POST 5: PERFORMANCE EXHAUST -->
+      <div class="blog-card">
+        <div class="blog-card-top">
+          <img class="blog-card-img" src="closeup-metal-exhaust-pipe-sports-car-scaled.jpg" alt="Performance Exhaust">
+          <div class="blog-card-body">
+            <div class="blog-card-header">
+              <span class="blog-card-tag">Performance Exhaust</span>
+              <span class="blog-card-meta">March 17, 2025</span>
+            </div>
+            <p class="blog-card-title">The Ultimate Guide to Performance Exhaust Systems</p>
+            <p class="blog-card-excerpt">A high-quality exhaust system is a game-changer. Performance exhausts improve engine efficiency and deliver that aggressive growl that enthusiasts love. Here&rsquo;s everything you need to know.</p>
+          </div>
+        </div>
+        <details class="blog-expand">
+          <summary>Read Full Article</summary>
+          <div class="article-body">
+            <h2>What Is a Performance Exhaust System?</h2>
+            <p>A performance exhaust system is designed to optimize the flow of exhaust gases out of the engine. Unlike factory exhaust systems, which prioritize noise reduction and cost, performance systems focus on maximizing power, efficiency, and sound.</p>
+            <h2>Benefits of a Performance Exhaust System</h2>
+            <ul>
+              <li><strong>Increased Horsepower &amp; Torque</strong> &mdash; By reducing exhaust backpressure, these systems allow the engine to breathe better, resulting in improved power output.</li>
+              <li><strong>Enhanced Engine Efficiency</strong> &mdash; Better exhaust flow means less energy wasted, contributing to more efficient engine operation.</li>
+              <li><strong>Improved Sound</strong> &mdash; From a deep rumble to a high-performance growl, performance exhausts offer a range of sound profiles to match your style.</li>
+              <li><strong>Better Fuel Economy</strong> &mdash; More efficient engines often consume less fuel, especially under normal driving conditions.</li>
+            </ul>
+            <h2>Types of Performance Exhaust Systems</h2>
+            <ul>
+              <li><strong>Cat-Back Exhaust Systems</strong> &mdash; Replace components from the catalytic converter to the exhaust tips. Known for noticeable performance gains and aggressive sound.</li>
+              <li><strong>Axle-Back Exhaust Systems</strong> &mdash; Replace the exhaust from the rear axle to the tips. Ideal for sound enhancement with moderate performance improvement.</li>
+              <li><strong>Header-Back Exhaust Systems</strong> &mdash; Replace the entire exhaust from the headers to the tips. Provides the most significant performance boost.</li>
+            </ul>
+            <h2>Materials: Stainless Steel vs. Aluminized Steel</h2>
+            <ul>
+              <li><strong>Stainless Steel</strong> &mdash; Highly durable and corrosion-resistant, ideal for long-lasting performance.</li>
+              <li><strong>Aluminized Steel</strong> &mdash; More affordable, offering decent performance but less durability than stainless steel.</li>
+            </ul>
+            <h2>Custom Exhaust Solutions at Zeus Performance</h2>
+            <p>At Zeus Performance, we offer custom exhaust systems tailored to your vehicle&rsquo;s specifications. Whether you&rsquo;re looking for more power, better sound, or improved fuel efficiency, our experts can design and install the perfect exhaust solution for you.</p>
+            <div class="article-note">Contact Zeus Performance to design your custom exhaust system today.</div>
+          </div>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="subscribe">
+    <h2 class="subscribe-heading">Subscribe for Performance Updates</h2>
+    <p class="subscribe-sub">Join the inner circle. Get the latest tuning guides, build breakdowns, and shop news delivered directly.</p>
+    <div class="subscribe-form">
+      <input class="subscribe-input" type="email" placeholder="Enter Your Email">
+      <button class="subscribe-btn" type="submit">Subscribe</button>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-divider"></div>
+    <div class="footer-inner">
+      <div>
+        <img class="footer-logo" src="logo.png" alt="Zeus Performance">
+        <p class="footer-tagline">Machined Precision.</p>
+      </div>
+      <div class="footer-col">
+        <a href="services.html">Services</a>
+        <a href="#">Tuning</a>
+        <a href="#">Maintenance</a>
+      </div>
+      <div class="footer-col">
+        <a href="#">Diagnostics</a>
+        <a href="#">Hours</a>
+        <a href="#">Location</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copyright">&copy; 2026 Zeus Performance. Machined Precision.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

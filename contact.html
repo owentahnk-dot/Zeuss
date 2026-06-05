@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Zeus Performance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,700;1,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0B0D10; color: #FFFFFF; font-family: 'Inter', sans-serif; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; }
+
+    /* ── NAVBAR ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      height: 56px;
+      background: #0B0D10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+    }
+    .nav-logo { height: 36px; }
+    .nav-links {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav-links a {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #FFFFFF;
+    }
+    .nav-links a.active {
+      border-bottom: 2px solid #10A0F0;
+      padding-bottom: 2px;
+    }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-trigger { display: flex; align-items: center; gap: 5px; cursor: pointer; }
+    .nav-dropdown-arrow { font-size: 8px; opacity: 0.7; }
+    .nav-dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0B0D10;
+      border: 1px solid #2A2F37;
+      border-radius: 4px;
+      min-width: 270px;
+      padding-top: 10px;
+      z-index: 1001;
+    }
+    .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+    .nav-dropdown-menu a {
+      display: block;
+      padding: 13px 20px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      color: #FFFFFF;
+      text-transform: none;
+      letter-spacing: normal;
+      border-bottom: 1px solid #2A2F37;
+    }
+    .nav-dropdown-menu a:last-child { border-bottom: none; }
+    .nav-dropdown-menu a:hover { background: #10A0F0; color: #FFFFFF; }
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .btn-nav-call {
+      border: 1px solid #FFFFFF;
+      background: transparent;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      padding: 8px 20px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+    .btn-nav-quote {
+      background: #10A0F0;
+      border: none;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      padding: 8px 20px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    /* ── CONTACT HERO ── */
+    .contact-hero {
+      background: #0B0D10;
+      padding: 80px 64px;
+    }
+    .contact-hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: flex-start;
+    }
+
+    /* left column */
+    .contact-left {}
+    .contact-headline-1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-style: italic;
+      font-weight: 800;
+      font-size: 72px;
+      text-transform: uppercase;
+      background: linear-gradient(180deg, #FFFFFF 0%, #EBEBEB 12%, #FFFFFF 26%, #B4B4B4 44%, #FFFFFF 58%, #909090 72%, #D8D8D8 86%, #FFFFFF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 0.9;
+    }
+    .contact-headline-2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-style: italic;
+      font-weight: 800;
+      font-size: 72px;
+      text-transform: uppercase;
+      line-height: 0.9;
+      background: linear-gradient(135deg, #10A0F0, #0A4DA8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .contact-sub {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      color: #9BA3AE;
+      max-width: 300px;
+      line-height: 1.6;
+      margin-top: 16px;
+      margin-bottom: 32px;
+    }
+    .contact-info-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .contact-icon-circle {
+      width: 36px;
+      height: 36px;
+      border: 1px solid #2A2F37;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-icon-circle svg {
+      width: 16px;
+      height: 16px;
+    }
+    .contact-info-text {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      color: #FFFFFF;
+    }
+    .contact-address-text {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      color: #FFFFFF;
+      line-height: 1.5;
+    }
+
+    /* right column — form */
+    .contact-form-card {
+      background: #181C22;
+      border: 1px solid #2A2F37;
+      border-radius: 8px;
+      padding: 32px;
+    }
+    .form-accent-line {
+      height: 3px;
+      background: linear-gradient(90deg, #FB4102, #F70902);
+      border-radius: 2px;
+      margin-bottom: 24px;
+    }
+    .form-heading {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: #FFFFFF;
+      margin-bottom: 24px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 16px;
+    }
+    .form-field:last-of-type { margin-bottom: 0; }
+    .form-label {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 12px;
+      color: #9BA3AE;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .form-input,
+    .form-textarea {
+      background: #0B0D10;
+      border: 1px solid #2A2F37;
+      border-radius: 4px;
+      padding: 10px 14px;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      width: 100%;
+      outline: none;
+    }
+    .form-input::placeholder,
+    .form-textarea::placeholder { color: #9BA3AE; }
+    .form-textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+    .form-row-fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .btn-submit {
+      width: 100%;
+      background: #10A0F0;
+      border: none;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    /* ── HOURS & MAP ── */
+    .hours-map {
+      background: #14181D;
+      padding: 48px 64px;
+    }
+    .hours-map-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+
+    /* hours */
+    .hours-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .hours-header svg { width: 16px; height: 16px; }
+    .hours-header-text {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      color: #FFFFFF;
+    }
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid #2A2F37;
+    }
+    .hours-day {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 13px;
+      color: #9BA3AE;
+      text-transform: uppercase;
+    }
+    .hours-time {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      color: #FFFFFF;
+    }
+    .hours-time.closed { color: #F70902; }
+
+    /* map */
+    .map-iframe {
+      width: 100%;
+      height: 280px;
+      border-radius: 8px;
+      border: none;
+      filter: grayscale(100%) invert(90%);
+      display: block;
+    }
+    .map-label {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      color: #FFFFFF;
+      margin-top: 12px;
+    }
+    .map-sublabel {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      color: #9BA3AE;
+      margin-top: 2px;
+    }
+    .btn-directions {
+      border: 1px solid #2A2F37;
+      background: transparent;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-top: 8px;
+    }
+
+    /* ── FOOTER ── */
+    .footer { background: #000000; }
+    .footer-divider {
+      height: 3px;
+      background: linear-gradient(90deg, #FAC309, #FB4102, #F70902);
+    }
+    .footer-contact-inner {
+      padding: 32px 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-logo { height: 36px; }
+    .footer-nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .footer-nav-links a {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 12px;
+      color: #9BA3AE;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .footer-contact-bottom {
+      padding: 0 64px 16px;
+      border-top: 1px solid #2A2F37;
+      padding-top: 12px;
+    }
+    .footer-copyright {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      color: #9BA3AE;
+      margin-top: 8px;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav { padding: 0 20px; }
+      .btn-nav-call { display: none; }
+      .contact-hero { padding: 48px 20px; }
+      .contact-hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .contact-headline-1,
+      .contact-headline-2 { font-size: 52px; }
+      .hours-map { padding: 32px 20px; }
+      .hours-map-inner { grid-template-columns: 1fr; gap: 32px; }
+      .footer-contact-inner { flex-direction: column; align-items: flex-start; padding: 24px 20px; }
+      .footer-contact-bottom { padding: 12px 20px; }
+      .form-row-fields { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html"><img class="nav-logo" src="logo.png" alt="Zeus Performance"></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <div class="nav-dropdown">
+        <a href="services.html" class="nav-dropdown-trigger">Services <span class="nav-dropdown-arrow">▾</span></a>
+        <div class="nav-dropdown-menu">
+          <a href="services.html">Dyno Tuning Services</a>
+          <a href="ecu-bench-unlock.html">ECU Bench Unlock Service</a>
+          <a href="general-repair.html">General Repair &amp; Maintenance Services</a>
+          <a href="performance-upgrades.html">Performance Upgrade Services</a>
+          <a href="suspension-upgrades.html">Suspension Upgrade Services</a>
+          <a href="wheels-tires.html">Wheels &amp; Tires Services</a>
+        </div>
+      </div>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html" class="active">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <a class="btn-nav-call" href="tel:+19788530384">Call Now</a>
+      <a class="btn-nav-quote" href="contact.html">Get a Free Quote</a>
+    </div>
+  </nav>
+
+  <section class="contact-hero">
+    <div class="contact-hero-inner">
+
+      <div class="contact-left">
+        <p class="contact-headline-1">Ignite</p>
+        <p class="contact-headline-2">Performance</p>
+        <p class="contact-sub">Ready to push limits? Drop us a line. Whether it&rsquo;s a routine tune-up or a full custom build, our boys are waiting.</p>
+        <a class="contact-info-row" href="tel:+19788530384">
+          <div class="contact-icon-circle">
+            <svg viewBox="0 0 16 16" fill="none" stroke="#10A0F0" stroke-width="1.3">
+              <path d="M2 2.5C2 2.2 2.2 2 2.5 2h2.4l1 2.5-.7.7a8.5 8.5 0 003.6 3.6l.7-.7 2.5 1V11.5c0 .3-.2.5-.5.5C5.5 12 2 8.5 2 4.5V2.5z"/>
+            </svg>
+          </div>
+          <span class="contact-info-text">(978) 853-0384</span>
+        </a>
+        <a class="contact-info-row" href="https://maps.app.goo.gl/ZEZ5HXK61X1koT7m6" target="_blank">
+          <div class="contact-icon-circle">
+            <svg viewBox="0 0 16 16" fill="none" stroke="#10A0F0" stroke-width="1.3">
+              <path d="M8 1.5A4.5 4.5 0 013.5 6c0 3.2 4.5 8.5 4.5 8.5S12.5 9.2 12.5 6A4.5 4.5 0 018 1.5z"/>
+              <circle cx="8" cy="6" r="1.5"/>
+            </svg>
+          </div>
+          <span class="contact-address-text">86 Newburyport Turnpike<br>Newbury, MA 01951</span>
+        </a>
+      </div>
+
+      <div class="contact-right">
+        <iframe
+          src="https://app.shopmonkey.cloud/public/quote-request/f6365a96-00fc-4b85-8c5a-18ba34e62d28"
+          title="Request a Quote — Zeus Performance"
+          width="100%"
+          height="820"
+          style="border:none; border-radius:8px; display:block;">
+        </iframe>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="hours-map">
+    <div class="hours-map-inner">
+
+      <div class="hours-left">
+        <div class="hours-header">
+          <svg viewBox="0 0 16 16" fill="none" stroke="#FFFFFF" stroke-width="1.3">
+            <circle cx="8" cy="8" r="6.5"/>
+            <path d="M8 4v4l2.5 2"/>
+          </svg>
+          <span class="hours-header-text">Operating Hours</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Monday</span>
+          <span class="hours-time">8:00 AM &ndash; 5:00 PM</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Tuesday</span>
+          <span class="hours-time">8:00 AM &ndash; 5:00 PM</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Wednesday</span>
+          <span class="hours-time">8:00 AM &ndash; 5:00 PM</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Thursday</span>
+          <span class="hours-time">8:00 AM &ndash; 5:00 PM</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Friday</span>
+          <span class="hours-time">8:00 AM &ndash; 5:00 PM</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Saturday</span>
+          <span class="hours-time">8:00 AM &ndash; 5:00 PM</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Sunday</span>
+          <span class="hours-time closed">Closed</span>
+        </div>
+      </div>
+
+      <div class="hours-right">
+        <iframe
+          class="map-iframe"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2944.5!2d-70.8789!3d42.7734!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e4e14f4fea90fd%3A0xf3fd5326238387da!2s86%20Newburyport%20Tpke%2C%20Newbury%2C%20MA%2001951!5e0!3m2!1sen!2sus!4v1234567890"
+          allowfullscreen=""
+          loading="lazy"
+          title="Zeus Performance Location">
+        </iframe>
+        <p class="map-label">HQ</p>
+        <p class="map-sublabel">Newbury, MA</p>
+        <a class="btn-directions" href="https://maps.app.goo.gl/ZEZ5HXK61X1koT7m6" target="_blank">&rarr; Get Directions</a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-divider"></div>
+    <div class="footer-contact-inner">
+      <img class="footer-logo" src="logo.png" alt="Zeus Performance">
+      <nav class="footer-nav-links">
+        <a href="services.html">Services</a>
+        <a href="#">Tuning</a>
+        <a href="#">Maintenance</a>
+        <a href="#">Diagnostics</a>
+        <a href="#">Hours</a>
+        <a href="#">Location</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+    <div class="footer-contact-bottom">
+      <p class="footer-copyright">&copy; 2026 Zeus Performance. Machined Precision.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
