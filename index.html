@@ -312,6 +312,85 @@
       margin-top: 16px;
     }
 
+    /* ── SERVICES PREVIEW ── */
+    .services-preview {
+      background: #14181D;
+      padding: 56px 64px;
+    }
+    .services-preview-header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .services-preview-label {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #9BA3AE;
+      margin-bottom: 10px;
+    }
+    .services-preview-label .bullet { color: #F70902; }
+    .services-preview-heading {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-style: italic;
+      font-weight: 800;
+      font-size: 42px;
+      text-transform: uppercase;
+      background: linear-gradient(180deg, #FFFFFF 0%, #EBEBEB 12%, #FFFFFF 26%, #B4B4B4 44%, #FFFFFF 58%, #909090 72%, #D8D8D8 86%, #FFFFFF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .service-card {
+      background: #181C22;
+      border: 1px solid #2A2F37;
+      border-radius: 8px;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: border-color 0.2s;
+    }
+    .service-card:hover { border-color: #10A0F0; }
+    .service-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #10A0F0, #0A4DA8);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+      flex-shrink: 0;
+    }
+    .service-name {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      color: #FFFFFF;
+    }
+    .service-desc {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      color: #9BA3AE;
+      line-height: 1.5;
+      flex: 1;
+    }
+    .service-arrow {
+      color: #10A0F0;
+      font-size: 16px;
+      font-weight: 700;
+      margin-top: 10px;
+      display: inline-block;
+    }
+
     /* ── FOOTER ── */
     .footer { background: #000000; }
     .footer-divider {
@@ -372,6 +451,10 @@
       .reviews-actions { flex-direction: column; width: 100%; }
       .btn-reviews { text-align: center; }
       .reviews-grid { grid-template-columns: 1fr; }
+      .services-preview { padding: 36px 20px; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .service-name { font-size: 14px; }
+      .service-desc { font-size: 12px; }
       .footer-inner { grid-template-columns: 1fr; padding: 24px 20px; }
       .footer-bottom { padding: 12px 20px; }
     }
@@ -434,6 +517,70 @@
 
   <section class="instagram-strip">
     <a class="btn-instagram" href="https://www.instagram.com/zeusperformancellc/" target="_blank">Follow Us on Instagram</a>
+  </section>
+
+  <section class="services-preview">
+    <div class="services-preview-header">
+      <p class="services-preview-label"><span class="bullet">•</span> What We Do</p>
+      <h2 class="services-preview-heading">Our Services</h2>
+    </div>
+    <div class="services-grid">
+
+      <a href="services.html" class="service-card">
+        <div class="service-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l2 2"/><path d="M16.24 7.76l-1.41 1.41"/></svg>
+        </div>
+        <h3 class="service-name">Dyno Tuning</h3>
+        <p class="service-desc">Custom ECU mapping on our in-house dyno for maximum power and efficiency.</p>
+        <span class="service-arrow">→</span>
+      </a>
+
+      <a href="ecu-bench-unlock.html" class="service-card">
+        <div class="service-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="6" height="6" rx="1"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg>
+        </div>
+        <h3 class="service-name">ECU Bench Unlock</h3>
+        <p class="service-desc">Unlock hidden performance directly on the bench — no running vehicle needed.</p>
+        <span class="service-arrow">→</span>
+      </a>
+
+      <a href="general-repair.html" class="service-card">
+        <div class="service-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <h3 class="service-name">General Repair</h3>
+        <p class="service-desc">Full-service maintenance and repair by experienced performance technicians.</p>
+        <span class="service-arrow">→</span>
+      </a>
+
+      <a href="performance-upgrades.html" class="service-card">
+        <div class="service-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <h3 class="service-name">Performance Upgrades</h3>
+        <p class="service-desc">Intakes, exhausts, turbos, and more — bolt-on gains done right.</p>
+        <span class="service-arrow">→</span>
+      </a>
+
+      <a href="suspension-upgrades.html" class="service-card">
+        <div class="service-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6M12 22v-6M4.93 4.93l4.24 4.24M14.83 14.83l4.24 4.24M2 12h6M22 12h-6M4.93 19.07l4.24-4.24M14.83 9.17l4.24-4.24"/></svg>
+        </div>
+        <h3 class="service-name">Suspension Upgrades</h3>
+        <p class="service-desc">Coilovers, sway bars, and alignment for a sharper, controlled ride.</p>
+        <span class="service-arrow">→</span>
+      </a>
+
+      <a href="wheels-tires.html" class="service-card">
+        <div class="service-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="22"/><line x1="2" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="22" y2="12"/></svg>
+        </div>
+        <h3 class="service-name">Wheels &amp; Tires</h3>
+        <p class="service-desc">Custom wheel fitment and tire mounting for street and track builds.</p>
+        <span class="service-arrow">→</span>
+      </a>
+
+    </div>
   </section>
 
   <section class="reviews">
