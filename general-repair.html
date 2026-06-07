@@ -59,12 +59,12 @@
       text-transform: uppercase; padding: 8px 20px; border-radius: 4px; display: inline-block;
     }
     .nav-toggle-input { display: none; }
-    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; margin-left: 4px; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 11px; margin-left: 4px; }
     .nav-hamburger span { display: block; width: 22px; height: 2px; background: #FFFFFF; border-radius: 2px; }
     .nav-mobile-menu {
       display: none; position: fixed; top: 56px; left: 0; right: 0; bottom: 0;
       background: #0B0D10; z-index: 998; overflow-y: auto;
-      border-top: 1px solid #2A2F37; padding-bottom: 32px;
+      border-top: 1px solid #2A2F37; padding-bottom: max(32px, env(safe-area-inset-bottom));
     }
     .nav-mobile-menu a {
       display: block; padding: 14px 24px;
@@ -80,6 +80,12 @@
     .nav-mobile-menu .mobile-sub {
       padding-left: 40px; font-size: 13px; font-weight: 400;
       text-transform: none; letter-spacing: normal; color: #9BA3AE;
+    }
+    .nav-mobile-menu .mobile-call-btn {
+      display: block; margin: 16px 20px 8px;
+      background: #10A0F0; color: #FFFFFF; text-align: center; font-weight: 700;
+      font-size: 14px; padding: 16px 24px; border-radius: 4px;
+      text-transform: uppercase; letter-spacing: 0.08em; border-bottom: none;
     }
 
     /* ── HERO ── */
@@ -219,6 +225,7 @@
       .nav-toggle-input:checked ~ .nav-mobile-menu { display: block; }
       .nav { padding: 0 20px; }
       .btn-nav-call { display: none; }
+      .btn-nav-quote { display: none; }
       .hero { padding: 80px 20px 40px; }
       .hero-headline { font-size: 48px; }
       .section-dark, .section-mid { padding: 40px 20px; }
@@ -267,6 +274,7 @@
       <a href="wheels-tires.html" class="mobile-sub">Wheels &amp; Tires</a>
       <a href="blog.html">Blog</a>
       <a href="contact.html">Contact</a>
+      <a href="tel:+19788530384" class="mobile-call-btn">Call (978) 853-0384</a>
     </div>
   </nav>
 
