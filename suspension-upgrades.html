@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0B0D10">
   <meta name="description" content="Suspension upgrade services at Zeus Performance — coilovers, sway bars, and alignment from KW, Eibach, Öhlins, and Bilstein. Based in Newbury, MA.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Zeus Performance">
+    <meta property="og:title" content="Suspension Upgrade Services — Zeus Performance">
+    <meta property="og:description" content="Suspension upgrade services at Zeus Performance — coilovers, sway bars, and alignment from KW, Eibach, Öhlins, and Bilstein. Based in Newbury, MA.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1200&q=80">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Suspension Upgrade Services — Zeus Performance">
+    <meta name="twitter:description" content="Suspension upgrade services at Zeus Performance — coilovers, sway bars, and alignment from KW, Eibach, Öhlins, and Bilstein. Based in Newbury, MA.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1200&q=80">
   <title>Suspension Upgrade Services — Zeus Performance</title>
   <link rel="icon" href="logo.png">
   <link rel="apple-touch-icon" href="logo.png">
@@ -12,6 +21,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,700;1,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    html { scroll-behavior: smooth; }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     body { background: #0B0D10; color: #FFFFFF; font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
     a { text-decoration: none; color: inherit; }
@@ -218,6 +228,15 @@
     }
     .cta-brands a { color: #10A0F0; font-weight: 600; }
 
+    .footer-phone {
+      font-family: 'Inter', sans-serif; font-size: 13px;
+      color: #FFFFFF; margin-top: 10px; display: block;
+    }
+    .footer-address {
+      font-family: 'Inter', sans-serif; font-size: 12px;
+      color: #9BA3AE; margin-top: 4px; line-height: 1.6;
+    }
+
     /* ── FOOTER ── */
     .footer { background: #000000; }
     .footer-divider { height: 3px; background: linear-gradient(90deg, #FAC309, #FB4102, #F70902); }
@@ -246,7 +265,51 @@
       .footer-inner { grid-template-columns: 1fr; padding: 24px 20px; }
       .footer-bottom { padding: 12px 20px; }
     }
-  </style>
+  
+    /* ── STICKY MOBILE CTA ── */
+    .mobile-cta-bar {
+      display: none;
+    }
+    @media (max-width: 768px) {
+      .mobile-cta-bar {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+        background: #0B0D10;
+        border-top: 1px solid #1E2229;
+        padding: 12px 16px;
+        padding-bottom: max(12px, env(safe-area-inset-bottom));
+        gap: 10px;
+      }
+      .mobile-cta-bar a {
+        flex: 1;
+        text-align: center;
+        padding: 14px 8px;
+        border-radius: 4px;
+        font-family: 'Inter', sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        text-decoration: none;
+      }
+      .mobile-cta-quote {
+        background: #10A0F0;
+        color: #FFFFFF;
+      }
+      .mobile-cta-call {
+        background: transparent;
+        color: #FFFFFF;
+        border: 1px solid #2C3340;
+      }
+      /* Add bottom padding so content isn't hidden behind CTA bar */
+      body { padding-bottom: 80px; }
+    }
+
+    </style>
 </head>
 <body>
 
@@ -338,7 +401,7 @@
     <h2 class="cta-heading">Performance You Can Feel</h2>
     <p class="cta-body">Whether you&rsquo;re looking to enhance your daily driving experience or prepare your car for the track, Zeus Performance provides top-tier suspension upgrade services that deliver noticeable improvements. Pairing your suspension upgrades with a <a href="services.html">custom performance tune</a> takes your vehicle&rsquo;s handling, power, and overall driving dynamics to the next level.</p>
     <p class="cta-body">Contact us to schedule your suspension upgrade and experience the difference precision engineering can make. Let Zeus Performance help you take control of your ride like never before.</p>
-    <p class="cta-brands">Brands we work with: <a href="https://www.kwsuspension.com" target="_blank">KW Suspension</a>, <a href="https://www.eibach.com" target="_blank">Eibach</a>, <a href="https://www.ohlins.com" target="_blank">&Ouml;hlins</a>, <a href="https://www.bilstein.com" target="_blank">Bilstein</a> and more</p>
+    <p class="cta-brands">Brands we work with: <a href="https://www.kwsuspension.com" target="_blank" rel="noopener noreferrer">KW Suspension</a>, <a href="https://www.eibach.com" target="_blank" rel="noopener noreferrer">Eibach</a>, <a href="https://www.ohlins.com" target="_blank" rel="noopener noreferrer">&Ouml;hlins</a>, <a href="https://www.bilstein.com" target="_blank" rel="noopener noreferrer">Bilstein</a> and more</p>
     <div>
       <a class="btn-cta-blue" href="tel:+19788530384">Call (978) 853-0384</a>
       <a class="btn-cta-outline" href="contact.html">Book Online &rarr;</a>
@@ -368,6 +431,11 @@
       <p class="footer-copyright">&copy; 2026 Zeus Performance. Machined Precision.</p>
     </div>
   </footer>
+
+  <div class="mobile-cta-bar">
+    <a href="contact.html" class="mobile-cta-quote">Get a Free Quote</a>
+    <a href="tel:+19788530384" class="mobile-cta-call">Call Now</a>
+  </div>
 
 </body>
 </html>
