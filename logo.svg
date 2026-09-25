@@ -1,0 +1,38 @@
+<!-- Zeus Performance logo, redrawn as vector. PERFORMANCE uses the Audiowide font (Google Fonts). -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1014 738" width="1014" height="738">
+<defs>
+  <style>@import url("https://fonts.googleapis.com/css2?family=Audiowide&amp;display=swap");</style>
+  <linearGradient id="silverSeg" x1="0" y1="1" x2="1" y2="0">
+    <stop offset="0" stop-color="#8a8f97"/><stop offset="0.5" stop-color="#b9bdc3"/><stop offset="1" stop-color="#e2e4e8"/>
+  </linearGradient>
+  <linearGradient id="hot1" gradientUnits="userSpaceOnUse" x1="650" y1="130" x2="880" y2="120">
+    <stop offset="0" stop-color="#ff1608"/><stop offset="0.55" stop-color="#ff3a0c"/><stop offset="1" stop-color="#ffb31c"/>
+  </linearGradient>
+  <linearGradient id="hot2" gradientUnits="userSpaceOnUse" x1="790" y1="270" x2="960" y2="170">
+    <stop offset="0" stop-color="#ff1608"/><stop offset="0.45" stop-color="#ff4a0e"/><stop offset="1" stop-color="#ffcc1f"/>
+  </linearGradient>
+  <linearGradient id="needle" x1="0" y1="1" x2="1" y2="0">
+    <stop offset="0" stop-color="#e9ebee"/><stop offset="1" stop-color="#8d939b"/>
+  </linearGradient>
+  <linearGradient id="swoosh" gradientUnits="userSpaceOnUse" x1="80" y1="300" x2="870" y2="600">
+    <stop offset="0" stop-color="#27b4ff"/><stop offset="0.45" stop-color="#1580e6"/><stop offset="1" stop-color="#0a3fae"/>
+  </linearGradient>
+  <linearGradient id="chrome" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="768" y2="176">
+    <stop offset="0" stop-color="#f7f8f9"/><stop offset="0.16" stop-color="#c9ccd1"/>
+    <stop offset="0.3" stop-color="#8f949b"/><stop offset="0.4" stop-color="#e9ebee"/>
+    <stop offset="0.52" stop-color="#ffffff"/><stop offset="0.64" stop-color="#a6abb2"/>
+    <stop offset="0.78" stop-color="#eceef0"/><stop offset="0.9" stop-color="#9da2a9"/><stop offset="1" stop-color="#d9dce0"/>
+  </linearGradient>
+  <linearGradient id="perf" gradientUnits="userSpaceOnUse" x1="220" y1="0" x2="830" y2="0">
+    <stop offset="0" stop-color="#22a6f5"/><stop offset="1" stop-color="#1060d8"/>
+  </linearGradient>
+  <filter id="shadow" x="-10%" y="-20%" width="120%" height="150%">
+    <feDropShadow dx="4" dy="7" stdDeviation="6" flood-color="#000" flood-opacity="0.75"/>
+  </filter>
+</defs>
+<g id="gauge" filter="url(#shadow)"><path d="M178.8,309.3 L179.9,305.6 L181.0,302.0 L182.2,298.4 L183.4,294.9 L184.6,291.3 L185.9,287.7 L187.3,284.2 L188.7,280.7 L190.1,277.1 L191.6,273.6 L193.1,270.1 L194.7,266.7 L196.3,263.2 L198.0,259.7 L199.7,256.3 L201.4,252.9 L203.2,249.5 L205.0,246.1 L206.9,242.7 L208.8,239.4 L210.8,236.1 L212.8,232.8 L214.8,229.5 L216.9,226.2 L246.9,242.8 L244.9,245.7 L242.9,248.6 L240.9,251.5 L239.0,254.5 L237.1,257.4 L235.3,260.4 L233.5,263.4 L231.7,266.4 L230.0,269.4 L228.3,272.5 L226.6,275.5 L225.0,278.6 L223.5,281.7 L221.9,284.8 L220.4,287.9 L219.0,291.1 L217.6,294.2 L216.2,297.4 L214.9,300.6 L213.6,303.8 L212.3,307.0 L211.1,310.2 L209.9,313.5 L208.8,316.7 Z" fill="url(#silverSeg)"/><path d="M231.2,205.7 L234.2,201.8 L237.3,197.9 L240.5,194.0 L243.7,190.2 L247.0,186.4 L250.3,182.6 L253.7,178.9 L257.2,175.2 L260.7,171.6 L264.2,168.0 L267.9,164.5 L271.6,160.9 L275.3,157.5 L279.1,154.1 L283.0,150.7 L286.9,147.4 L290.8,144.1 L294.8,140.9 L298.9,137.7 L303.0,134.5 L307.2,131.5 L311.4,128.4 L315.7,125.4 L320.0,122.5 L344.3,153.6 L340.3,156.1 L336.3,158.6 L332.4,161.2 L328.6,163.8 L324.7,166.4 L320.9,169.1 L317.2,171.8 L313.5,174.6 L309.8,177.4 L306.2,180.3 L302.6,183.2 L299.1,186.2 L295.6,189.2 L292.2,192.2 L288.8,195.3 L285.5,198.5 L282.2,201.6 L279.0,204.8 L275.8,208.1 L272.7,211.4 L269.6,214.7 L266.6,218.1 L263.6,221.5 L260.7,224.9 Z" fill="url(#silverSeg)"/><path d="M342.4,108.5 L347.3,105.7 L352.1,103.0 L357.0,100.4 L362.0,97.8 L367.0,95.3 L372.0,92.9 L377.1,90.5 L382.3,88.2 L387.4,85.9 L392.6,83.7 L397.8,81.6 L403.1,79.6 L408.4,77.6 L413.8,75.7 L419.1,73.8 L424.5,72.0 L430.0,70.3 L435.4,68.6 L440.9,67.0 L446.4,65.5 L452.0,64.1 L457.5,62.7 L463.1,61.4 L468.7,60.2 L479.6,103.8 L474.6,104.7 L469.6,105.6 L464.6,106.6 L459.6,107.7 L454.6,108.9 L449.7,110.1 L444.8,111.3 L439.9,112.7 L435.0,114.0 L430.1,115.5 L425.3,117.0 L420.5,118.6 L415.7,120.2 L410.9,121.9 L406.2,123.6 L401.5,125.4 L396.8,127.3 L392.2,129.2 L387.6,131.2 L383.0,133.3 L378.5,135.3 L374.0,137.5 L369.5,139.7 L365.0,142.0 Z" fill="url(#silverSeg)"/><path d="M495.9,55.2 L502.2,54.3 L508.5,53.5 L514.8,52.7 L521.1,52.1 L527.4,51.5 L533.8,51.1 L540.1,50.7 L546.5,50.4 L552.8,50.2 L559.2,50.0 L565.6,50.0 L571.9,50.1 L578.3,50.2 L584.7,50.4 L591.0,50.7 L597.4,51.1 L603.7,51.6 L610.1,52.2 L616.4,52.9 L622.7,53.6 L629.0,54.4 L635.3,55.4 L641.5,56.4 L647.7,57.5 L637.2,107.2 L631.8,106.1 L626.3,105.0 L620.9,104.0 L615.4,103.1 L609.9,102.3 L604.4,101.5 L598.9,100.8 L593.4,100.2 L587.8,99.6 L582.3,99.1 L576.7,98.7 L571.1,98.4 L565.5,98.2 L559.9,98.0 L554.3,97.9 L548.7,97.8 L543.1,97.9 L537.5,98.0 L531.9,98.2 L526.2,98.5 L520.6,98.9 L515.0,99.3 L509.4,99.8 L503.9,100.4 Z" fill="url(#silverSeg)"/><path d="M669.6,55.9 L678.1,57.9 L686.5,60.1 L694.9,62.5 L703.2,65.0 L711.4,67.7 L719.6,70.5 L727.7,73.5 L735.7,76.6 L743.7,79.9 L751.5,83.3 L759.3,86.9 L767.0,90.6 L774.6,94.5 L782.1,98.5 L789.5,102.6 L796.7,106.9 L803.9,111.4 L810.9,115.9 L817.9,120.6 L824.7,125.4 L831.4,130.4 L837.9,135.4 L844.4,140.6 L850.7,145.9 L774.1,222.5 L769.7,218.7 L765.1,214.9 L760.5,211.2 L755.8,207.5 L751.0,204.0 L746.0,200.5 L741.0,197.1 L735.9,193.8 L730.7,190.6 L725.4,187.5 L720.0,184.4 L714.5,181.5 L709.0,178.6 L703.4,175.9 L697.6,173.2 L691.9,170.7 L686.0,168.2 L680.1,165.9 L674.1,163.6 L668.1,161.5 L662.0,159.4 L655.8,157.5 L649.6,155.7 L643.3,153.9 Z" fill="url(#hot1)"/><path d="M868.2,156.5 L873.3,161.5 L878.3,166.5 L883.2,171.7 L888.0,176.9 L892.6,182.2 L897.2,187.6 L901.6,193.0 L905.9,198.6 L910.1,204.2 L914.1,209.8 L918.0,215.6 L921.8,221.3 L925.5,227.2 L929.1,233.1 L932.5,239.1 L935.8,245.1 L938.9,251.2 L941.9,257.3 L944.8,263.5 L947.6,269.7 L950.2,275.9 L952.7,282.3 L955.0,288.6 L957.2,295.0 L842.9,327.8 L841.6,323.5 L840.1,319.2 L838.6,314.9 L837.0,310.7 L835.3,306.4 L833.4,302.2 L831.5,298.1 L829.5,293.9 L827.4,289.8 L825.2,285.7 L822.8,281.6 L820.4,277.6 L817.9,273.6 L815.3,269.6 L812.6,265.7 L809.8,261.8 L806.9,257.9 L804.0,254.1 L800.9,250.3 L797.7,246.6 L794.5,242.9 L791.1,239.2 L787.7,235.6 L784.2,232.1 Z" fill="url(#hot2)"/></g>
+<path id="needle-shape" d="M392,282 L724,183 L716,181 L388,269 Z" fill="url(#needle)" filter="url(#shadow)"/>
+<path id="swoosh-shape" filter="url(#shadow)" fill="url(#swoosh)" d="M214,192 C40,300 10,560 250,650 C450,720 730,650 878,556 C700,630 450,662 290,600 C95,522 88,328 214,192 Z"/>
+<g id="zeus" fill="url(#chrome)" filter="url(#shadow)" transform="translate(235,296) matrix(1,0,-0.27,1,0,0) scale(0.8659,1)"><path d="M0,0 H205 V50 L68,126 H205 V176 H0 V126 L137,50 H0 Z"/><path d="M232,0 H386 V50 H264 V65.0 H372 V111.0 H264 V126 H386 V176 H232 Q214,176 214,158 V18 Q214,0 232,0 Z"/><path d="M395,0 H445 V126 H523 V0 H573 V146 Q573,176 543,176 H425 Q395,176 395,146 Z"/><path d="M612,0 H768 V50 H632 V63.0 H738 Q768,63.0 768,93.0 V146 Q768,176 738,176 H582 V126 H718 V113.0 H612 Q582,113.0 582,83.0 V30 Q582,0 612,0 Z"/></g>
+<text x="523" y="557" text-anchor="middle" font-family="Audiowide" font-size="64" letter-spacing="3.5" fill="url(#perf)" stroke="url(#perf)" stroke-width="3.2" stroke-linejoin="round" transform="skewX(-14) translate(139,0)" filter="url(#shadow)">PERFORMANCE</text>
+</svg>

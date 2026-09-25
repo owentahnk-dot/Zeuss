@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0B0D10">
+  <meta name="description" content="Have a third-party extended warranty or vehicle service contract? Zeus Performance in Newbury, MA handles the diagnosis, documentation and claim with your warranty company. Call (978) 853-0384.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Zeus Performance">
+    <meta property="og:title" content="Extended Warranty Claims — Zeus Performance">
+    <meta property="og:description" content="Have a third-party extended warranty or vehicle service contract? Zeus Performance in Newbury, MA handles the diagnosis, documentation and claim with your warranty company. Call (978) 853-0384.">
+    <meta property="og:image" content="https://zeuss-ruddy.vercel.app/hero-911-front.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Extended Warranty Claims — Zeus Performance">
+    <meta name="twitter:description" content="Have a third-party extended warranty or vehicle service contract? Zeus Performance in Newbury, MA handles the diagnosis, documentation and claim with your warranty company. Call (978) 853-0384.">
+    <meta name="twitter:image" content="https://zeuss-ruddy.vercel.app/hero-911-front.jpg">
+  <title>Extended Warranty Claims — Zeus Performance</title>
+  <link rel="icon" href="logo.png">
+  <link rel="apple-touch-icon" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,700;1,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body { background: #0B0D10; color: #FFFFFF; font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; }
+
+    /* ── NAVBAR ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      height: 56px;
+      background: #0B0D10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+    }
+    .nav-logo { height: 36px; }
+    .nav-links {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav-links a {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #FFFFFF;
+    }
+    .nav-links a.active {
+      border-bottom: 2px solid #10A0F0;
+      padding-bottom: 2px;
+    }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-trigger { display: flex; align-items: center; gap: 5px; cursor: pointer; }
+    .nav-dropdown-arrow { font-size: 8px; opacity: 0.7; }
+    .nav-dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0B0D10;
+      border: 1px solid #2A2F37;
+      border-radius: 4px;
+      min-width: 270px;
+      padding-top: 10px;
+      z-index: 1001;
+    }
+    .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+    .nav-dropdown-menu a {
+      display: block;
+      padding: 13px 20px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      color: #FFFFFF;
+      text-transform: none;
+      letter-spacing: normal;
+      border-bottom: 1px solid #2A2F37;
+    }
+    .nav-dropdown-menu a:last-child { border-bottom: none; }
+    .nav-dropdown-menu a:hover { background: #10A0F0; color: #FFFFFF; }
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .btn-nav-call {
+      border: 1px solid #FFFFFF;
+      background: transparent;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      padding: 8px 20px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+    .btn-nav-quote {
+      background: #10A0F0;
+      border: none;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      padding: 8px 20px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+    .nav-toggle-input { display: none; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 11px; margin-left: 4px; }
+    .nav-hamburger span { display: block; width: 22px; height: 2px; background: #FFFFFF; border-radius: 2px; }
+    .nav-mobile-menu {
+      display: none; position: fixed; top: 56px; left: 0; right: 0; bottom: 0;
+      background: #0B0D10; z-index: 998; overflow-y: auto;
+      border-top: 1px solid #2A2F37; padding-bottom: max(32px, env(safe-area-inset-bottom));
+    }
+    .nav-mobile-menu a {
+      display: block; padding: 14px 24px;
+      font-family: 'Inter', sans-serif; font-weight: 500; font-size: 14px;
+      text-transform: uppercase; letter-spacing: 0.08em; color: #FFFFFF;
+      border-bottom: 1px solid #1E2228;
+    }
+    .nav-mobile-menu .mobile-section {
+      padding: 12px 24px 4px;
+      font-family: 'Inter', sans-serif; font-weight: 700; font-size: 10px;
+      text-transform: uppercase; letter-spacing: 0.12em; color: #FB4102;
+    }
+    .nav-mobile-menu .mobile-sub {
+      padding-left: 40px; font-size: 13px; font-weight: 400;
+      text-transform: none; letter-spacing: normal; color: #9BA3AE;
+    }
+    .nav-mobile-menu .mobile-call-btn {
+      display: block; margin: 16px 20px 8px;
+      background: #10A0F0; color: #FFFFFF; text-align: center; font-weight: 700;
+      font-size: 14px; padding: 16px 24px; border-radius: 4px;
+      text-transform: uppercase; letter-spacing: 0.08em; border-bottom: none;
+    }
+
+    /* ── SHARED ── */
+    .container { max-width: 1280px; margin: 0 auto; }
+    .eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #10A0F0;
+      margin-bottom: 14px;
+    }
+    .chrome-heading {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-style: italic;
+      font-weight: 800;
+      font-size: 48px;
+      line-height: 1;
+      text-transform: uppercase;
+      background: linear-gradient(180deg, #FFFFFF 0%, #EBEBEB 12%, #FFFFFF 26%, #B4B4B4 44%, #FFFFFF 58%, #909090 72%, #D8D8D8 86%, #FFFFFF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .body-copy {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      color: #9BA3AE;
+    }
+    .redline {
+      height: 2px;
+      width: 64px;
+      background: linear-gradient(90deg, #FAC309, #FB4102, #F70902);
+      margin: 20px 0 24px;
+    }
+    .btn-primary, .btn-ghost {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 15px 32px;
+      border-radius: 4px;
+      display: inline-block;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+    .btn-primary {
+      border: 1.5px solid #10A0F0;
+      background: linear-gradient(135deg, #10A0F0, #0A4DA8);
+      color: #FFFFFF;
+    }
+    .btn-primary:hover { transform: scale(1.04); box-shadow: 0 0 18px rgba(16,160,240,0.45); }
+    .btn-ghost {
+      border: 1.5px solid rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.06);
+      color: #FFFFFF;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.14); }
+    .text-link {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #10A0F0;
+    }
+    .text-link:hover { color: #FFFFFF; }
+
+    .section { padding: 96px 64px; }
+    .section--alt { background: #14181D; }
+    .section-header { text-align: center; max-width: 720px; margin: 0 auto 48px; }
+    .section-header .redline { margin: 20px auto; }
+    .buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      position: relative;
+      padding: 128px 20px 112px;
+      text-align: center;
+      background:
+        linear-gradient(180deg, rgba(11,13,16,0.72) 0%, rgba(11,13,16,0.82) 70%, #0B0D10 100%),
+        url('closeup-metal-exhaust-pipe-sports-car-scaled.jpg') center / cover;
+    }
+    .page-hero h1 { font-size: 84px; line-height: 0.92; margin-bottom: 24px; }
+    .page-hero .lead {
+      max-width: 640px; margin: 0 auto 36px;
+      font-size: 18px; line-height: 1.65; color: #D1D5DB;
+    }
+    .page-hero .proof {
+      margin-top: 32px; display: flex; justify-content: center; flex-wrap: wrap; gap: 10px 28px;
+      font-size: 14px; color: #D1D5DB;
+    }
+    .page-hero .proof span::before { content: '\2713'; color: #10A0F0; font-weight: 700; margin-right: 8px; }
+
+    /* ── ADVOCATE (two columns) ── */
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .split .body-copy + .body-copy { margin-top: 16px; }
+    .evidence { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .evidence-item {
+      background: #181C22; border: 1px solid #2A2F37; border-radius: 6px; padding: 22px;
+    }
+    .evidence-item h3 {
+      font-family: 'Barlow Condensed', sans-serif; font-style: italic; font-weight: 700;
+      font-size: 22px; text-transform: uppercase; margin-bottom: 6px;
+    }
+    .evidence-item p { font-size: 14px; line-height: 1.55; color: #9BA3AE; }
+
+    /* ── STEPS ── */
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; counter-reset: step; }
+    .step {
+      position: relative; background: #181C22; border: 1px solid #2A2F37; border-radius: 6px;
+      padding: 28px 24px; border-top: 3px solid #10A0F0;
+    }
+    .step-num {
+      font-family: 'Barlow Condensed', sans-serif; font-style: italic; font-weight: 800;
+      font-size: 56px; line-height: 1; color: #10A0F0; opacity: 0.9; margin-bottom: 10px;
+    }
+    .step h3 {
+      font-family: 'Barlow Condensed', sans-serif; font-style: italic; font-weight: 700;
+      font-size: 24px; text-transform: uppercase; margin-bottom: 8px;
+    }
+    .step p { font-size: 14px; line-height: 1.6; color: #9BA3AE; }
+
+    /* ── TEARDOWN ── */
+    .callout {
+      max-width: 1000px; margin: 0 auto; background: #181C22; border: 1px solid #2A2F37;
+      border-left: 4px solid #FB4102; border-radius: 6px; padding: 40px;
+    }
+    .callout .body-copy + .body-copy { margin-top: 14px; }
+    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; }
+    .compare-col { border-radius: 6px; padding: 22px 24px; background: #0F1216; border: 1px solid #2A2F37; }
+    .compare-col h3 {
+      font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 14px;
+    }
+    .compare-col.covered h3 { color: #10A0F0; }
+    .compare-col.yours h3 { color: #FB4102; }
+    .compare-col li { list-style: none; font-size: 14px; line-height: 1.5; color: #D1D5DB; padding-left: 24px; position: relative; margin-bottom: 10px; }
+    .compare-col.covered li::before { content: '\2713'; position: absolute; left: 0; color: #10A0F0; font-weight: 700; }
+    .compare-col.yours li::before { content: '$'; position: absolute; left: 2px; color: #FB4102; font-weight: 700; }
+
+    /* ── DENIALS ── */
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .card { background: #181C22; border: 1px solid #2A2F37; border-radius: 6px; padding: 28px; }
+    .card-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.18em; color: #FB4102; margin-bottom: 10px; }
+    .card h3 {
+      font-family: 'Barlow Condensed', sans-serif; font-style: italic; font-weight: 700;
+      font-size: 26px; text-transform: uppercase; margin-bottom: 12px; line-height: 1.05;
+    }
+    .card p { font-size: 14px; line-height: 1.6; color: #9BA3AE; }
+    .card .response { margin-top: 14px; padding-top: 14px; border-top: 1px solid #2A2F37; color: #D1D5DB; }
+    .card .response strong { color: #10A0F0; }
+
+    /* ── CHECKLIST ── */
+    .checklist { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; max-width: 900px; margin: 0 auto; }
+    .checklist li {
+      list-style: none; display: flex; gap: 14px; align-items: flex-start;
+      background: #181C22; border: 1px solid #2A2F37; border-radius: 6px; padding: 18px 20px;
+      font-size: 15px; line-height: 1.5; color: #D1D5DB;
+    }
+    .checklist li::before {
+      content: '\2713'; flex: none; width: 26px; height: 26px; border-radius: 50%;
+      background: linear-gradient(135deg, #10A0F0, #0A4DA8); color: #fff; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; font-size: 13px;
+    }
+    .checklist li strong { color: #FFFFFF; }
+    .note { text-align: center; max-width: 640px; margin: 32px auto 0; font-size: 15px; line-height: 1.6; color: #9BA3AE; }
+    .note a { color: #10A0F0; font-weight: 600; }
+
+    /* ── FAQ ── */
+    .faq { max-width: 860px; margin: 0 auto; }
+    .faq details { border-bottom: 1px solid #2A2F37; }
+    .faq summary {
+      list-style: none; cursor: pointer; padding: 22px 40px 22px 0; position: relative;
+      font-size: 17px; font-weight: 600; color: #FFFFFF;
+    }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after {
+      content: '+'; position: absolute; right: 4px; top: 50%; transform: translateY(-50%);
+      font-size: 26px; font-weight: 400; color: #10A0F0; transition: transform 0.2s;
+    }
+    .faq details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+    .faq details p { padding: 0 0 22px; font-size: 15px; line-height: 1.7; color: #9BA3AE; max-width: 760px; }
+
+    .disclaimer { max-width: 860px; margin: 40px auto 0; font-size: 12px; line-height: 1.6; color: #6B7280; text-align: center; }
+
+    /* ── SCROLL REVEAL (only hides content when JS is running) ── */
+    .js .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+      transition-delay: var(--delay, 0s);
+    }
+    .js .reveal.is-visible { opacity: 1; transform: none; }
+
+    /* ── CTA BAND ── */
+    .cta-band {
+      position: relative;
+      padding: 112px 20px;
+      text-align: center;
+      background-image:
+        linear-gradient(rgba(11,13,16,0.8), rgba(11,13,16,0.85)),
+        url('sport-cars-parade-race-highway-scaled.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+    .cta-band .chrome-heading { font-size: 64px; }
+    .cta-band .body-copy { max-width: 520px; margin: 18px auto 32px; color: #D1D5DB; }
+    .cta-band .hero-buttons { margin-bottom: 28px; }
+    /* ── FOOTER ── */
+    .footer { background: #000000; }
+    .footer-divider {
+      height: 3px;
+      background: linear-gradient(90deg, #FAC309, #FB4102, #F70902);
+    }
+    .footer-inner {
+      padding: 56px 64px 40px;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+      gap: 40px;
+    }
+    .footer-logo { height: 40px; margin-bottom: 14px; }
+    .footer-tagline {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #9BA3AE;
+      max-width: 280px;
+    }
+    .footer-heading {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #FFFFFF;
+      margin-bottom: 16px;
+    }
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .footer-col a, .footer-col p {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      line-height: 1.5;
+      color: #9BA3AE;
+    }
+    .footer-col a:hover { color: #FFFFFF; }
+    .footer-col .footer-phone { color: #FFFFFF; font-weight: 600; }
+    .footer-bottom {
+      padding: 18px 64px;
+      border-top: 1px solid #2A2F37;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .footer-copyright {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: #9BA3AE;
+    }
+
+    /* ── TABLET ── */
+    @media (max-width: 1024px) {
+      .section { padding: 80px 32px; }
+      .steps { grid-template-columns: repeat(2, 1fr); }
+      .cards { grid-template-columns: 1fr; }
+      .split { grid-template-columns: 1fr; gap: 40px; }
+      .footer-inner { grid-template-columns: 1fr 1fr; padding: 48px 32px 32px; }
+      .footer-bottom { padding: 18px 32px; }
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-toggle-input:checked ~ .nav-mobile-menu { display: block; }
+      .nav { padding: 0 20px; }
+      .btn-nav-call { display: none; }
+      .btn-nav-quote { display: none; }
+      .section { padding: 64px 20px; }
+      .page-hero { padding: 80px 20px 72px; }
+      .page-hero h1 { font-size: 52px; }
+      .page-hero .lead { font-size: 16px; }
+      .page-hero .proof { flex-direction: column; align-items: center; }
+      .chrome-heading { font-size: 38px; }
+      .buttons { flex-direction: column; align-items: stretch; max-width: 360px; margin: 0 auto; }
+      .btn-primary, .btn-ghost { text-align: center; }
+      .evidence, .steps, .compare, .checklist { grid-template-columns: 1fr; }
+      .callout { padding: 28px 22px; }
+      .faq summary { font-size: 16px; }
+      .cta-band { padding: 80px 20px; }
+      .cta-band .chrome-heading { font-size: 44px; }
+      .footer-inner { grid-template-columns: 1fr; padding: 40px 20px 24px; gap: 32px; }
+      .footer-bottom { padding: 16px 20px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      html { scroll-behavior: auto; }
+      .js .reveal { opacity: 1; transform: none; }
+    }
+    /* ── NAV SQUEEZE: tablet/small-laptop widths ── */
+    @media (min-width: 769px) and (max-width: 1100px) {
+      .nav-links { gap: 22px; }
+      .btn-nav-call { display: none; }
+    }
+  </style>
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+  <nav class="nav">
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+    <a href="index.html"><img class="nav-logo" src="logo.png" alt="Zeus Performance"></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <div class="nav-dropdown">
+        <a href="services.html" class="nav-dropdown-trigger">Services <span class="nav-dropdown-arrow">▾</span></a>
+        <div class="nav-dropdown-menu">
+          <a href="services.html">Dyno Tuning Services</a>
+          <a href="ecu-bench-unlock.html">ECU Bench Unlock Service</a>
+          <a href="general-repair.html">General Repair &amp; Maintenance Services</a>
+          <a href="performance-upgrades.html">Performance Upgrade Services</a>
+          <a href="suspension-upgrades.html">Suspension Upgrade Services</a>
+          <a href="wheels-tires.html">Wheels &amp; Tires Services</a>
+        </div>
+      </div>
+      <a href="warranty.html" class="active">Warranty</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <a class="btn-nav-call" href="tel:+19788530384">Call Now</a>
+      <a class="btn-nav-quote" href="contact.html">Book Now</a>
+      <label for="nav-toggle" class="nav-hamburger"><span></span><span></span><span></span></label>
+    </div>
+    <div class="nav-mobile-menu">
+      <a href="index.html">Home</a>
+      <div class="mobile-section">Services</div>
+      <a href="services.html" class="mobile-sub">Dyno Tuning</a>
+      <a href="ecu-bench-unlock.html" class="mobile-sub">ECU Bench Unlock</a>
+      <a href="general-repair.html" class="mobile-sub">General Repair &amp; Maintenance</a>
+      <a href="performance-upgrades.html" class="mobile-sub">Performance Upgrades</a>
+      <a href="suspension-upgrades.html" class="mobile-sub">Suspension Upgrades</a>
+      <a href="wheels-tires.html" class="mobile-sub">Wheels &amp; Tires</a>
+      <a href="warranty.html">Warranty Claims</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+      <a href="tel:+19788530384" class="mobile-call-btn">Call (978) 853-0384</a>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <p class="eyebrow">&mdash; Extended Warranty Repairs &mdash;</p>
+    <h1 class="chrome-heading">We Handle<br>Your Warranty Claim</h1>
+    <p class="lead">Have a third-party extended warranty or vehicle service contract? Bring your car to Zeus. We diagnose the problem, document it properly and deal with the warranty company for you, so you&rsquo;re not stuck on hold arguing with an adjuster.</p>
+    <div class="buttons">
+      <a class="btn-primary" href="contact.html">Start a Warranty Claim &rarr;</a>
+      <a class="btn-ghost" href="tel:+19788530384">Call (978) 853-0384</a>
+    </div>
+    <div class="proof">
+      <span>Third-party warranties &amp; service contracts</span>
+      <span>We talk to the adjuster</span>
+      <span>Nothing starts without your OK</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split">
+      <div class="reveal">
+        <p class="eyebrow">&mdash; On Your Side &mdash;</p>
+        <h2 class="chrome-heading">We Fight for the<br>Claim, Not Against You</h2>
+        <div class="redline"></div>
+        <p class="body-copy">Warranty companies review every claim looking for a reason to say no. A vague diagnosis or missing paperwork is all it takes for a legitimate repair to get denied.</p>
+        <p class="body-copy">That&rsquo;s why we build the case before we ever call. We pin down exactly what failed and why, back it up with evidence, and push for the full repair your contract is supposed to cover. If an adjuster pushes back, we push back too.</p>
+      </div>
+      <div class="evidence reveal" style="--delay:0.15s">
+        <div class="evidence-item"><h3>Scan Data</h3><p>Fault codes and freeze-frame data showing what happened at the moment of failure.</p></div>
+        <div class="evidence-item"><h3>Photos</h3><p>Clear photos of the failed part and the damage, before anything is replaced.</p></div>
+        <div class="evidence-item"><h3>Test Results</h3><p>Pressure, compression and electrical tests that confirm the diagnosis.</p></div>
+        <div class="evidence-item"><h3>Written Estimate</h3><p>Itemized parts and labor, so the warranty company can&rsquo;t quietly cut the job short.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="eyebrow">&mdash; How It Works &mdash;</p>
+        <h2 class="chrome-heading">Your Claim in Four Steps</h2>
+        <div class="redline"></div>
+      </div>
+      <div class="steps">
+        <div class="step reveal"><p class="step-num">01</p><h3>Drop Off</h3><p>Bring the car and your warranty contract or policy number. We confirm your coverage and deductible up front.</p></div>
+        <div class="step reveal" style="--delay:0.1s"><p class="step-num">02</p><h3>Diagnose</h3><p>We find the root cause and document it with scan data, test results and photos.</p></div>
+        <div class="step reveal" style="--delay:0.2s"><p class="step-num">03</p><h3>We Handle the Call</h3><p>We send the evidence and estimate to the warranty company, answer the adjuster&rsquo;s questions and get the repair authorized.</p></div>
+        <div class="step reveal" style="--delay:0.3s"><p class="step-num">04</p><h3>Repair</h3><p>Once it&rsquo;s approved, we fix it right. You pay your deductible and anything your contract doesn&rsquo;t cover.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="eyebrow">&mdash; Know Before You Sign &mdash;</p>
+        <h2 class="chrome-heading">What Is a Teardown<br>Authorization?</h2>
+        <div class="redline"></div>
+      </div>
+      <div class="callout reveal">
+        <p class="body-copy">When an engine or transmission fails internally, the warranty company usually won&rsquo;t approve a repair until someone opens it up and shows them what broke. Taking it apart costs labor, and they&rsquo;ll ask you to sign off on that teardown first.</p>
+        <p class="body-copy">Here&rsquo;s the catch: if the teardown shows a covered failure, that labor is typically paid as part of the claim. If the claim is denied, the teardown labor is usually yours to pay. That&rsquo;s why we run every test we can from the outside first, and walk you through the odds before you sign anything.</p>
+        <div class="compare">
+          <div class="compare-col covered">
+            <h3>Usually covered if approved</h3>
+            <ul>
+              <li>The failed part your contract covers</li>
+              <li>Labor to repair or replace it</li>
+              <li>Teardown labor, when the failure is covered</li>
+            </ul>
+          </div>
+          <div class="compare-col yours">
+            <h3>Usually your cost</h3>
+            <ul>
+              <li>Your deductible</li>
+              <li>Parts or failures your contract excludes</li>
+              <li>Teardown labor, if the claim is denied</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="eyebrow">&mdash; Common Denials &mdash;</p>
+        <h2 class="chrome-heading">Why Claims Get Denied<br>&amp; How We Respond</h2>
+        <div class="redline"></div>
+      </div>
+      <div class="cards">
+        <div class="card reveal">
+          <p class="card-label">Denial Reason</p>
+          <h3>&ldquo;Pre-Existing Condition&rdquo;</h3>
+          <p>The adjuster claims the problem started before your coverage did.</p>
+          <p class="response"><strong>Our response:</strong> scan data and physical evidence showing a sudden failure, not a slow one that was already there.</p>
+        </div>
+        <div class="card reveal" style="--delay:0.1s">
+          <p class="card-label">Denial Reason</p>
+          <h3>&ldquo;Lack of Maintenance&rdquo;</h3>
+          <p>The adjuster blames skipped oil changes or missing service records.</p>
+          <p class="response"><strong>Our response:</strong> your service history plus inspection findings that show what actually caused the failure.</p>
+        </div>
+        <div class="card reveal" style="--delay:0.2s">
+          <p class="card-label">Denial Reason</p>
+          <h3>&ldquo;Only the Part That Broke&rdquo;</h3>
+          <p>They approve the failed part but refuse the damage it caused to everything around it.</p>
+          <p class="response"><strong>Our response:</strong> documenting how the failure spread, and pointing to what your contract says about resulting damage.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="eyebrow">&mdash; Come Prepared &mdash;</p>
+        <h2 class="chrome-heading">What to Bring</h2>
+        <div class="redline"></div>
+      </div>
+      <ul class="checklist reveal">
+        <li><span><strong>Your warranty contract</strong> or policy number</span></li>
+        <li><span><strong>Photo ID</strong> of the contract holder</span></li>
+        <li><span><strong>Maintenance records</strong>, such as oil change receipts</span></li>
+        <li><span><strong>Any denial letters</strong> or emails from past claims</span></li>
+      </ul>
+      <!-- TODO (Zeus): add the list of warranty companies you work with here -->
+      <p class="note reveal">We work with third-party warranty companies and vehicle service contracts. Not sure if yours is covered? <a href="tel:+19788530384">Call us</a> with your plan name and we&rsquo;ll check.</p>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="eyebrow">&mdash; FAQ &mdash;</p>
+        <h2 class="chrome-heading">Warranty Questions</h2>
+        <div class="redline"></div>
+      </div>
+      <div class="faq reveal">
+        <details>
+          <summary>Do I have to take my car to the dealership?</summary>
+          <p>Usually not. Most third-party service contracts let you choose any licensed repair shop. Check your contract, or call us and we&rsquo;ll look at it with you.</p>
+        </details>
+        <details>
+          <summary>What will I have to pay?</summary>
+          <p>Typically your deductible, plus anything your contract doesn&rsquo;t cover, like maintenance items or excluded parts. We go over this with you before any work starts.</p>
+        </details>
+        <details>
+          <summary>How long does approval take?</summary>
+          <p>It depends on the warranty company and the repair. Simple component repairs can be approved quickly, while major engine or transmission claims often take longer and may require an inspection. We keep you updated the whole way.</p>
+        </details>
+        <details>
+          <summary>What happens if my claim is denied?</summary>
+          <p>We stop and explain your options before anything else happens. We&rsquo;ll share the documentation we collected, help you appeal if it makes sense, or quote the repair so you can decide. We don&rsquo;t do work you haven&rsquo;t approved.</p>
+        </details>
+        <details>
+          <summary>Can the warranty company send used or cheaper parts?</summary>
+          <p>Some contracts allow used or remanufactured parts. We inspect every part before it goes on your car, and if something isn&rsquo;t right, we document it and push back.</p>
+        </details>
+        <details>
+          <summary>Is this the same as my factory warranty?</summary>
+          <p>No. Repairs under the original manufacturer&rsquo;s warranty are normally handled by the dealer. This page is about extended warranties and service contracts from third-party companies.</p>
+        </details>
+      </div>
+      <p class="disclaimer">Zeus Performance is an independent repair shop and is not affiliated with any warranty company. Coverage, deductibles and approval are determined by your contract and your warranty provider.</p>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="reveal">
+      <p class="eyebrow">&mdash; Let Us Handle It &mdash;</p>
+      <h2 class="chrome-heading">Got a Claim?<br>Bring It to Zeus</h2>
+      <p class="body-copy">Bring your car and your contract. We&rsquo;ll take it from there.</p>
+      <div class="buttons">
+        <a class="btn-primary" href="contact.html">Start a Warranty Claim &rarr;</a>
+        <a class="btn-ghost" href="tel:+19788530384">Call (978) 853-0384</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-divider"></div>
+    <div class="footer-inner">
+      <div>
+        <img class="footer-logo" src="logo.png" alt="Zeus Performance" loading="lazy">
+        <p class="footer-tagline">Dyno tuning, performance upgrades and general repair for luxury and sports vehicles. Machined precision.</p>
+      </div>
+      <div class="footer-col">
+        <p class="footer-heading">Services</p>
+        <a href="services.html">Dyno Tuning</a>
+        <a href="ecu-bench-unlock.html">ECU Bench Unlock</a>
+        <a href="general-repair.html">General Repair</a>
+        <a href="performance-upgrades.html">Performance Upgrades</a>
+        <a href="suspension-upgrades.html">Suspension Upgrades</a>
+        <a href="wheels-tires.html">Wheels &amp; Tires</a>
+      </div>
+      <div class="footer-col">
+        <p class="footer-heading">Company</p>
+        <a href="index.html">Home</a>
+        <a href="warranty.html">Warranty Claims</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+        <a href="https://www.instagram.com/zeusperformancellc/" target="_blank" rel="noopener noreferrer">Instagram</a>
+      </div>
+      <div class="footer-col">
+        <p class="footer-heading">Visit Us</p>
+        <p>86 Newburyport Turnpike<br>Newbury, MA 01951</p>
+        <a class="footer-phone" href="tel:+19788530384">(978) 853-0384</a>
+        <p>Mon &ndash; Sat: 8:00 AM &ndash; 5:00 PM<br>Sunday: Closed</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copyright">&copy; 2026 Zeus Performance LLC. All rights reserved.</p>
+      <p class="footer-copyright">Machined Precision.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var items = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) {
+        items.forEach(function (el) { el.classList.add('is-visible'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+      items.forEach(function (el) { io.observe(el); });
+    })();
+  </script>
+
+</body>
+</html>
