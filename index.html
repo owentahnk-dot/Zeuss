@@ -9,11 +9,11 @@
     <meta property="og:site_name" content="Zeus Performance">
     <meta property="og:title" content="Zeus Performance — Unleash Your Vehicle's Full Potential">
     <meta property="og:description" content="Zeus Performance in Newbury, MA — expert dyno tuning, ECU mapping, performance upgrades, and general repair for luxury and sports vehicles. Call (978) 853-0384.">
-    <meta property="og:image" content="https://zeuss-ruddy.vercel.app/hero-911-front.jpg">
+    <meta property="og:image" content="https://zeuss-ruddy.vercel.app/hero-video-poster.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Zeus Performance — Unleash Your Vehicle's Full Potential">
     <meta name="twitter:description" content="Zeus Performance in Newbury, MA — expert dyno tuning, ECU mapping, performance upgrades, and general repair for luxury and sports vehicles. Call (978) 853-0384.">
-    <meta name="twitter:image" content="https://zeuss-ruddy.vercel.app/hero-911-front.jpg">
+    <meta name="twitter:image" content="https://zeuss-ruddy.vercel.app/hero-video-poster.jpg">
   <title>Zeus Performance — Unleash Your Vehicle's Full Potential</title>
   <link rel="icon" href="logo.png">
   <link rel="apple-touch-icon" href="logo.png">
@@ -228,36 +228,23 @@
       text-align: center;
       overflow: hidden;
     }
-    .hero-bg, .hero-canvas, .hero-shade {
+    .hero-bg, .hero-video, .hero-shade {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
     }
+    /* Still frame from the shop video, shown while it loads (and instead of it when motion is reduced) */
     .hero-bg {
       z-index: -3;
-      /* Opening picture: a head-on night render of the same white 911 as the 3D scene, full-bleed like
-         the original hero photo. The 3D scene fades in over it; it stays for devices without 3D or
-         visitors who prefer reduced motion. */
-      background:
-        linear-gradient(rgba(11,13,16,0.35), rgba(11,13,16,0.5)),
-        url('hero-911-front.jpg') center 40% / cover;
-      animation: hero-zoom 8s ease-out both;
-      transition: opacity 1.2s ease;
+      background: #0B0D10 url('hero-video-poster.jpg') center / cover;
     }
-    @keyframes hero-zoom {
-      from { transform: scale(1.06); }
-      to { transform: scale(1); }
-    }
-    /* 3D scene from hero3d.js; fades in over the photo once the car model has loaded */
-    .hero-canvas {
+    /* Background video: Zeus shop footage (Aston Martin on the dyno) */
+    .hero-video {
       z-index: -2;
-      display: block;
-      opacity: 0;
-      transition: opacity 1.2s ease;
+      object-fit: cover;
+      object-position: center 55%;
     }
-    .hero--3d .hero-canvas { opacity: 1; }
-    .hero--3d .hero-bg { opacity: 0; }
 
     .hero--stage { justify-content: flex-end; padding-bottom: 72px; }
     .hero--stage > .hero-label { display: none; }
@@ -265,8 +252,55 @@
     .hero--stage > .hero-sub { margin-bottom: 28px; }
     .hero--stage > .hero-proof { margin-top: 28px; }
     .hero--stage .scroll-cue { display: none; }
+    .hero-panel { display: none; }
+
+    /* Wide screens: the vertical shop video is shown sharp in a phone-shaped panel beside the
+       headline, with a blurred copy of it filling the background (stretching it full-width blurs it) */
+    @media (min-width: 900px) {
+      .hero.hero--stage {
+        display: grid;
+        grid-template-columns: minmax(0, 640px) auto;
+        grid-template-rows: 1fr auto auto auto auto 1fr;
+        justify-content: center;
+        align-content: center;
+        column-gap: clamp(48px, 7vw, 112px);
+        padding: 56px 64px;
+        text-align: left;
+      }
+      .hero--stage > .hero-headline, .hero--stage > .hero-sub,
+      .hero--stage > .hero-buttons, .hero--stage > .hero-proof { grid-column: 1; }
+      .hero--stage > .hero-headline { grid-row: 2; font-size: clamp(52px, 5.1vw, 74px); }
+      .hero--stage > .hero-sub { grid-row: 3; }
+      .hero--stage > .hero-buttons { grid-row: 4; }
+      .hero--stage > .hero-proof { grid-row: 5; }
+      .hero--stage > .hero-sub { max-width: none; }
+      .hero--stage .hero-buttons, .hero--stage .hero-proof { justify-content: flex-start; }
+      .hero-panel {
+        display: block;
+        grid-column: 2;
+        grid-row: 1 / -1;
+        align-self: center;
+        position: relative;
+        height: min(74vh, 640px);
+        aspect-ratio: 672 / 960;
+        border-radius: 20px;
+        overflow: hidden;
+        background: #0B0D10 url('hero-video-poster.jpg') center / cover;
+        border: 1px solid rgba(255,255,255,0.14);
+        box-shadow: 0 30px 80px rgba(0,0,0,0.65), 0 0 70px rgba(16,160,240,0.22);
+        animation: rise 0.9s 0.3s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+      }
+      .hero-panel video { width: 100%; height: 100%; object-fit: cover; display: block; }
+      .hero-video { filter: blur(28px) brightness(0.55) saturate(1.15); transform: scale(1.15); }
+      .hero-bg { filter: blur(28px) brightness(0.55); transform: scale(1.15); }
+      .hero--stage .hero-shade {
+        background:
+          linear-gradient(90deg, rgba(11,13,16,0.85) 0%, rgba(11,13,16,0.55) 50%, rgba(11,13,16,0.35) 100%),
+          linear-gradient(180deg, rgba(11,13,16,0) 70%, #0B0D10 100%);
+      }
+    }
     .hero--stage .hero-shade {
-      background: linear-gradient(180deg, rgba(11,13,16,0) 0%, rgba(11,13,16,0) 45%, rgba(11,13,16,0.75) 72%, #0B0D10 100%);
+      background: linear-gradient(180deg, rgba(11,13,16,0.35) 0%, rgba(11,13,16,0.3) 40%, rgba(11,13,16,0.8) 72%, #0B0D10 100%);
     }
     .hero-shade {
       z-index: -1;
@@ -710,7 +744,6 @@
         min-height: calc(100svh - 56px);
         padding: 56px 20px 64px;
       }
-      .hero-bg { background-image: linear-gradient(rgba(11,13,16,0.2), rgba(11,13,16,0.5)), url('hero-911-front-mobile.jpg'); background-position: center, center top; background-size: auto, 100% auto; background-repeat: no-repeat; background-color: #050608; }
       .hero-headline { font-size: 60px; }
       .hero--stage > .hero-headline { font-size: 46px; }
       .hero--stage { padding-bottom: 48px; }
@@ -741,6 +774,7 @@
       *, *::before, *::after { animation: none !important; transition: none !important; }
       html { scroll-behavior: auto; }
       .js .reveal { opacity: 1; transform: none; }
+      .hero-video { display: none; }
       .reviews-marquee { -webkit-mask-image: none; mask-image: none; }
       .reviews-grid { width: auto; flex-wrap: wrap; justify-content: center; }
       .reviews-grid [aria-hidden="true"] { display: none; }
@@ -752,21 +786,12 @@
     }
   </style>
   <script>document.documentElement.classList.add('js');</script>
-  <script type="importmap">
-  {
-    "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
-    }
-  }
-  </script>
-  <script type="module" src="hero3d.js?v=6"></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "AutoRepair",
     "name": "Zeus Performance LLC",
-    "image": "https://zeuss-ruddy.vercel.app/hero-911-front.jpg",
+    "image": "https://zeuss-ruddy.vercel.app/hero-video-poster.jpg",
     "url": "https://zeusperformance.com",
     "telephone": "+1-978-853-0384",
     "address": {
@@ -848,7 +873,12 @@
 
   <section class="hero hero--stage">
     <div class="hero-bg" aria-hidden="true"></div>
+    <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="hero-video-poster.jpg" aria-hidden="true">
+      <source src="hero-video.mp4" type='video/mp4; codecs="hvc1"'>
+      <source src="hero-video-h264.mp4" type="video/mp4">
+    </video>
     <div class="hero-shade" aria-hidden="true"></div>
+    <div class="hero-panel" aria-hidden="true"></div>
     <p class="hero-label"><span class="dash">&mdash;</span> Zeus Performance <span class="dash">&mdash;</span></p>
     <h1 class="hero-headline">Built for Power.<br>Tuned for Precision.</h1>
     <p class="hero-sub">Dyno tuning, performance upgrades &amp; repair in Newbury, MA</p>
@@ -1090,11 +1120,29 @@
     </div>
     <div class="footer-bottom">
       <p class="footer-copyright">&copy; 2026 Zeus Performance LLC. All rights reserved.</p>
-      <p class="footer-copyright">3D model: <a href="https://sketchfab.com/3d-models/free-porsche-911-carrera-4s-d01b254483794de3819786d93e0e1ebf" target="_blank" rel="noopener noreferrer">&ldquo;Free Porsche 911 Carrera 4S&rdquo;</a> by Karol Miklas, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></p>
+      <p class="footer-copyright">Machined Precision.</p>
     </div>
   </footer>
 
   <script>
+    (function () {
+      var bg = document.querySelector('.hero-video');
+      var panel = document.querySelector('.hero-panel');
+      var wide = window.matchMedia('(min-width: 900px)');
+      var calm = window.matchMedia('(prefers-reduced-motion: reduce)');
+      function fillPanel() {
+        if (!bg || !panel || panel.firstChild || !wide.matches || calm.matches) return;
+        var v = bg.cloneNode(true);
+        v.removeAttribute('class');
+        panel.appendChild(v);
+        v.addEventListener('loadedmetadata', function () { v.currentTime = bg.currentTime || 0; });
+        var p = v.play();
+        if (p && p.catch) p.catch(function () {});
+      }
+      fillPanel();
+      if (wide.addEventListener) wide.addEventListener('change', fillPanel);
+    })();
+
     (function () {
       var items = document.querySelectorAll('.reveal');
       if (!('IntersectionObserver' in window)) {
