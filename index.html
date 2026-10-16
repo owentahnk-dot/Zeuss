@@ -475,7 +475,7 @@
       border-radius: 6px;
       overflow: hidden;
       border: 1px solid #2A2F37;
-      aspect-ratio: 4 / 5;
+      aspect-ratio: 1206 / 1146;
     }
     .mission-media img { width: 100%; height: 100%; object-fit: cover; }
     .mission-media::after {
@@ -568,18 +568,24 @@
     }
     .team-inner {
       display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      gap: 64px;
+      grid-template-columns: auto 1fr;
+      gap: 72px;
       align-items: center;
+      justify-content: center;
     }
+    /* Vertical crew video, shown whole so the burned-in captions aren't cropped */
     .team-media {
       position: relative;
-      border-radius: 6px;
+      border-radius: 16px;
       overflow: hidden;
       border: 1px solid #2A2F37;
-      aspect-ratio: 16 / 11;
+      aspect-ratio: 720 / 1124;
+      height: min(78vh, 680px);
+      background: #0B0D10 url('crew-video-poster.jpg') center / cover;
+      box-shadow: 0 30px 70px rgba(0,0,0,0.55), 0 0 60px rgba(16,160,240,0.15);
     }
-    .team-media img { width: 100%; height: 100%; object-fit: cover; }
+    .team-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .team-copy { max-width: 560px; }
     .team-copy .body-copy + .body-copy { margin-top: 16px; }
     .team-copy .btn-primary { margin-top: 32px; }
 
@@ -652,15 +658,32 @@
     }
 
     /* ── CTA BAND ── */
+    /* Faded split-screen background: engine bay on the left, Lamborghini in the shop on the right */
     .cta-band {
       position: relative;
+      isolation: isolate;
+      overflow: hidden;
       padding: 112px 20px;
       text-align: center;
-      background-image:
-        linear-gradient(rgba(11,13,16,0.8), rgba(11,13,16,0.85)),
-        url('sport-cars-parade-race-highway-scaled.jpg');
+      background: #0B0D10;
+    }
+    .cta-band::before, .cta-band::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 50%;
+      z-index: -2;
       background-size: cover;
       background-position: center;
+    }
+    .cta-band::before { left: 0; background-image: url('photos/cta-engine.jpg'); }
+    .cta-band::after { right: 0; background-image: url('photos/cta-lambo.jpg'); background-position: center 60%; }
+    .cta-shade {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(90deg, rgba(11,13,16,0.8) 0%, rgba(11,13,16,0.9) 50%, rgba(11,13,16,0.8) 100%);
     }
     .cta-band .chrome-heading { font-size: 64px; }
     .cta-band .body-copy { max-width: 520px; margin: 18px auto 32px; color: #D1D5DB; }
@@ -755,9 +778,9 @@
       .chrome-heading { font-size: 38px; }
       .mission, .team, .reviews { padding: 64px 20px; }
       .mission-inner, .team-inner { grid-template-columns: 1fr; gap: 36px; }
-      .mission-media { aspect-ratio: 4 / 3; }
+      .mission-media { aspect-ratio: 1206 / 1146; }
       .mission-pillars { grid-template-columns: 1fr; }
-      .team-media { order: 2; }
+      .team-media { order: 2; height: auto; width: 100%; max-width: 420px; justify-self: center; }
       .services { padding: 80px 20px; clip-path: polygon(0 24px, 100% 0, 100% calc(100% - 24px), 0 100%); }
       .services-grid { grid-template-columns: 1fr; gap: 14px; }
       .service-card { min-height: 280px; padding: 22px; }
@@ -918,7 +941,7 @@
         </div>
       </div>
       <div class="mission-media reveal" style="--delay:0.15s">
-        <img src="closeup-metal-exhaust-pipe-sports-car-scaled.jpg" alt="Close-up of a performance exhaust on a sports car" loading="lazy">
+        <img src="photos/zeus-shop.jpg" alt="The Zeus Performance shop at night, with a classic Porsche 911 inside" loading="lazy">
       </div>
     </div>
   </section>
@@ -934,7 +957,7 @@
       <div class="services-grid">
 
         <a href="services.html" class="service-card reveal" style="--delay:0.00s">
-          <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&q=70" alt="" loading="lazy">
+          <img src="photos/dyno-tuning.jpg" alt="" loading="lazy" style="object-position:center 40%">
           <p class="service-num">01</p>
           <h3 class="service-name">Dyno Tuning</h3>
           <p class="service-desc">Custom ECU mapping on our in-house dyno for maximum power and efficiency.</p>
@@ -942,7 +965,7 @@
         </a>
 
         <a href="ecu-bench-unlock.html" class="service-card reveal" style="--delay:0.12s">
-          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=70" alt="" loading="lazy">
+          <img src="photos/ecu-unlock.jpg" alt="" loading="lazy">
           <p class="service-num">02</p>
           <h3 class="service-name">ECU Bench Unlock</h3>
           <p class="service-desc">Unlock hidden performance directly on the bench, no running vehicle needed.</p>
@@ -950,7 +973,7 @@
         </a>
 
         <a href="general-repair.html" class="service-card reveal" style="--delay:0.24s">
-          <img src="https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?w=800&q=70" alt="" loading="lazy">
+          <img src="photos/general-repair.jpg" alt="" loading="lazy">
           <p class="service-num">03</p>
           <h3 class="service-name">General Repair</h3>
           <p class="service-desc">Full-service maintenance and repair by experienced performance technicians.</p>
@@ -958,7 +981,7 @@
         </a>
 
         <a href="performance-upgrades.html" class="service-card reveal" style="--delay:0.00s">
-          <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=800&q=70" alt="" loading="lazy">
+          <img src="photos/performance-upgrades.jpg" alt="" loading="lazy">
           <p class="service-num">04</p>
           <h3 class="service-name">Performance Upgrades</h3>
           <p class="service-desc">Intakes, exhausts, turbos and more. Bolt-on gains done right.</p>
@@ -966,7 +989,7 @@
         </a>
 
         <a href="suspension-upgrades.html" class="service-card reveal" style="--delay:0.12s">
-          <img src="suspension-repair-suspension-installation-1024x576%20(1).jpg" alt="" loading="lazy">
+          <img src="photos/suspension-upgrades.jpg" alt="" loading="lazy">
           <p class="service-num">05</p>
           <h3 class="service-name">Suspension Upgrades</h3>
           <p class="service-desc">Coilovers, sway bars and alignment for a sharper, more controlled ride.</p>
@@ -974,7 +997,7 @@
         </a>
 
         <a href="wheels-tires.html" class="service-card reveal" style="--delay:0.24s">
-          <img src="https://images.unsplash.com/photo-1601411101851-ea0e07766235?w=800&q=70" alt="" loading="lazy">
+          <img src="photos/wheels-tires.jpg" alt="" loading="lazy">
           <p class="service-num">06</p>
           <h3 class="service-name">Wheels &amp; Tires</h3>
           <p class="service-desc">Custom wheel fitment and tire mounting for street and track builds.</p>
@@ -991,7 +1014,7 @@
   <section class="team">
     <div class="container team-inner">
       <div class="team-media reveal">
-        <img src="paint-protective-film-ppf-zeus-performance-scaled.jpg" alt="Inside the Zeus Performance shop" loading="lazy">
+        <video src="crew-video.mp4" poster="crew-video-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="The Zeus Performance crew introducing themselves in the shop"></video>
       </div>
       <div class="team-copy reveal" style="--delay:0.15s">
         <p class="eyebrow">&mdash; Meet the Crew &mdash;</p>
@@ -1075,6 +1098,7 @@
   </section>
 
   <section class="cta-band">
+    <div class="cta-shade" aria-hidden="true"></div>
     <div class="reveal">
     <p class="eyebrow">&mdash; Ready When You Are &mdash;</p>
     <h2 class="chrome-heading">Book Your Build</h2>
