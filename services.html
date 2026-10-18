@@ -9,11 +9,11 @@
     <meta property="og:site_name" content="Zeus Performance">
     <meta property="og:title" content="Dyno Tuning — Zeus Performance">
     <meta property="og:description" content="Professional dyno tuning and ECU mapping at Zeus Performance in Newbury, MA. Custom power and torque gains for street and track vehicles.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1200&q=80">
+    <meta property="og:image" content="https://zeuss-ruddy.vercel.app/photos/zeus-shop.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Dyno Tuning — Zeus Performance">
     <meta name="twitter:description" content="Professional dyno tuning and ECU mapping at Zeus Performance in Newbury, MA. Custom power and torque gains for street and track vehicles.">
-    <meta name="twitter:image" content="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1200&q=80">
+    <meta name="twitter:image" content="https://zeuss-ruddy.vercel.app/photos/zeus-shop.jpg">
   <title>Dyno Tuning — Zeus Performance</title>
   <link rel="icon" href="logo.png">
   <link rel="apple-touch-icon" href="logo.png">
@@ -151,7 +151,7 @@
       min-height: 400px;
       background-image:
         linear-gradient(rgba(11,13,16,0.65), rgba(11,13,16,0.65)),
-        url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1400');
+        url('photos/dyno-bay.jpg');
       background-size: cover;
       background-position: center;
       display: flex;
@@ -548,7 +548,7 @@
       .hero {
         background-image:
           linear-gradient(rgba(11,13,16,0.65), rgba(11,13,16,0.65)),
-          url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=600&q=70');
+          url('photos/dyno-bay.jpg');
         padding: 80px 20px 40px;
       }
       .hero-headline { font-size: 48px; }
@@ -611,6 +611,60 @@
       .nav-links { gap: 22px; }
       .btn-nav-call { display: none; }
     }
+
+    /* ── SHOP GALLERY (Zeus photos & videos) ── */
+    .shop-gallery { background: #0B0D10; padding: 72px 64px; text-align: center; }
+    .shop-gallery-label { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #10A0F0; margin-bottom: 12px; }
+    .shop-gallery-heading {
+      font-family: 'Barlow Condensed', sans-serif; font-style: italic; font-weight: 800; font-size: 44px;
+      text-transform: uppercase; line-height: 1; margin-bottom: 36px;
+      background: linear-gradient(180deg, #FFFFFF 0%, #EBEBEB 12%, #FFFFFF 26%, #B4B4B4 44%, #FFFFFF 58%, #909090 72%, #D8D8D8 86%, #FFFFFF 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .shop-gallery-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; max-width: 1200px; margin: 0 auto; }
+    .shop-gallery-grid figure {
+      margin: 0; flex: 0 1 270px; aspect-ratio: 3 / 4; border-radius: 10px; overflow: hidden;
+      border: 1px solid #2A2F37; background: #14181D; box-shadow: 0 16px 40px rgba(0,0,0,0.45);
+    }
+    .shop-gallery-grid img, .shop-gallery-grid video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    @media (max-width: 768px) {
+      .shop-gallery { padding: 48px 20px; }
+      .shop-gallery-heading { font-size: 34px; }
+      .shop-gallery-grid { gap: 10px; }
+      .shop-gallery-grid figure { flex-basis: calc(50% - 5px); }
+    }
+    /* ── HEADER PHOTO: Zeus's (tall) shop photo shown whole beside the text, blurred copy behind ── */
+    .hero-photo { display: none; }
+    @media (min-width: 900px) {
+      .hero {
+        position: relative; isolation: isolate; overflow: hidden;
+        display: grid !important;
+        grid-template-columns: minmax(0, 620px) auto;
+        grid-auto-rows: auto;
+        align-content: center; justify-content: center;
+        column-gap: clamp(40px, 6vw, 96px);
+        background: #0B0D10 !important;
+        min-height: 520px; padding: 72px 64px !important;
+      }
+      .hero::before {
+        content: ''; position: absolute; inset: -40px; z-index: -2;
+        background: url('videos/dyno-m4.jpg') center / cover;
+        filter: blur(30px) brightness(0.45);
+      }
+      .hero::after {
+        content: ''; position: absolute; inset: 0; z-index: -1;
+        background: linear-gradient(90deg, rgba(11,13,16,0.9) 0%, rgba(11,13,16,0.6) 60%, rgba(11,13,16,0.4) 100%);
+      }
+      .hero > *:not(.hero-photo) { grid-column: 1; justify-self: start; }
+      .hero-photo {
+        display: block; grid-column: 2; grid-row: 1 / span 6; align-self: center;
+        height: min(64vh, 460px); border-radius: 14px; overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.14);
+        box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 50px rgba(16,160,240,0.18);
+      }
+      .hero-photo img, .hero-photo video { height: 100%; width: auto; display: block; }
+      .hero-photo video { aspect-ratio: 540 / 960; object-fit: cover; }
+    }
   </style>
 </head>
 <body>
@@ -657,6 +711,7 @@
   </nav>
 
   <section class="hero">
+    <div class="hero-photo"><video src="videos/dyno-m4.mp4" poster="videos/dyno-m4.jpg" autoplay muted loop playsinline preload="auto" aria-label="A BMW M4 running on the Zeus dyno"></video></div>
     <p class="hero-label">Precision Calibration</p>
     <h1 class="hero-headline">Dyno Tuning</h1>
     <p class="hero-body">Unleash the true potential of your machine. Our state-of-the-art dynamometer tuning facility provides microscopic adjustments to fuel, ignition, and boost maps. We don&rsquo;t just chase peak horsepower; we engineer a broader powerband, crystalline throttle response, and uncompromised drivability.</p>
@@ -710,6 +765,16 @@
   </section>
 
   <!-- PARTNERS + CTA -->
+  <section class="shop-gallery">
+    <p class="shop-gallery-label">&mdash; From the Shop &mdash;</p>
+    <h2 class="shop-gallery-heading">Dyno Day at Zeus</h2>
+    <div class="shop-gallery-grid">
+      <figure><video src="videos/dyno-m4.mp4" poster="videos/dyno-m4.jpg" autoplay muted loop playsinline preload="metadata" aria-label="A BMW M4 running on the Zeus dyno"></video></figure>
+      <figure><img src="photos/dyno-bay.jpg" alt="The Zeus Performance dyno bay" loading="lazy"></figure>
+      <figure><img src="photos/dyno-tuning.jpg" alt="A teal BMW M4 strapped to the dyno" loading="lazy"></figure>
+    </div>
+  </section>
+
   <section class="partners">
     <h2 class="section-heading" style="-webkit-text-fill-color:unset; background:none; color:#FFFFFF;">Get Ready to Unleash the Beast</h2>
     <p class="partners-body">Don&rsquo;t let untapped potential sit under your hood. Experience the difference with Zeus Performance&rsquo;s professional Dyno Tuning services. Contact us today to schedule an appointment and elevate your driving experience to legendary status.</p>

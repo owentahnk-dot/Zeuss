@@ -440,7 +440,7 @@
     }
     .mission-inner {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr auto;
       gap: 64px;
       align-items: center;
     }
@@ -475,9 +475,12 @@
       border-radius: 6px;
       overflow: hidden;
       border: 1px solid #2A2F37;
-      aspect-ratio: 1206 / 1146;
+      aspect-ratio: 540 / 960;
+      height: min(78vh, 640px);
+      border-radius: 16px;
+      background: #0B0D10 url('videos/shop-walkthrough.jpg') center / cover;
     }
-    .mission-media img { width: 100%; height: 100%; object-fit: cover; }
+    .mission-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
     .mission-media::after {
       content: '';
       position: absolute;
@@ -516,7 +519,7 @@
       isolation: isolate;
       transition: border-color 0.25s, box-shadow 0.25s;
     }
-    .service-card img {
+    .service-card img, .service-card video {
       position: absolute;
       inset: 0;
       width: 100%;
@@ -533,7 +536,7 @@
       background: linear-gradient(180deg, rgba(11,13,16,0.1) 0%, rgba(11,13,16,0.6) 45%, rgba(11,13,16,0.95) 100%);
     }
     .service-card:hover { border-color: #10A0F0; box-shadow: 0 0 24px rgba(16,160,240,0.2); }
-    .service-card:hover img { transform: scale(1.06); }
+    .service-card:hover img, .service-card:hover video { transform: scale(1.06); }
     .service-num {
       font-family: 'Inter', sans-serif;
       font-weight: 700;
@@ -778,7 +781,7 @@
       .chrome-heading { font-size: 38px; }
       .mission, .team, .reviews { padding: 64px 20px; }
       .mission-inner, .team-inner { grid-template-columns: 1fr; gap: 36px; }
-      .mission-media { aspect-ratio: 1206 / 1146; }
+      .mission-media { height: auto; width: 100%; max-width: 420px; justify-self: center; }
       .mission-pillars { grid-template-columns: 1fr; }
       .team-media { order: 2; height: auto; width: 100%; max-width: 420px; justify-self: center; }
       .services { padding: 80px 20px; clip-path: polygon(0 24px, 100% 0, 100% calc(100% - 24px), 0 100%); }
@@ -838,11 +841,6 @@
         "closes": "17:00"
       }
     ],
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "reviewCount": "78"
-    },
     "sameAs": [
       "https://www.instagram.com/zeusperformancellc/"
     ],
@@ -910,7 +908,7 @@
       <a class="btn-ghost" href="#services">Our Services</a>
     </div>
     <div class="hero-proof">
-      <span><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><strong>4.8/5</strong> from 78 Google reviews</span>
+      <span><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><strong>4.9/5</strong> on Google reviews</span>
       <span class="sep"></span>
       <a href="tel:+19788530384">(978) 853-0384</a>
     </div>
@@ -941,7 +939,7 @@
         </div>
       </div>
       <div class="mission-media reveal" style="--delay:0.15s">
-        <img src="photos/zeus-shop.jpg" alt="The Zeus Performance shop at night, with a classic Porsche 911 inside" loading="lazy">
+        <video src="videos/shop-walkthrough.mp4" poster="videos/shop-walkthrough.jpg" autoplay muted loop playsinline preload="metadata" aria-label="A walk through the Zeus Performance shop"></video>
       </div>
     </div>
   </section>
@@ -957,7 +955,7 @@
       <div class="services-grid">
 
         <a href="services.html" class="service-card reveal" style="--delay:0.00s">
-          <img src="photos/dyno-tuning.jpg" alt="" loading="lazy" style="object-position:center 40%">
+          <video src="videos/dyno-m4.mp4" poster="videos/dyno-m4.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
           <p class="service-num">01</p>
           <h3 class="service-name">Dyno Tuning</h3>
           <p class="service-desc">Custom ECU mapping on our in-house dyno for maximum power and efficiency.</p>
@@ -973,7 +971,7 @@
         </a>
 
         <a href="general-repair.html" class="service-card reveal" style="--delay:0.24s">
-          <img src="photos/general-repair.jpg" alt="" loading="lazy">
+          <img src="photos/general-repair-card.jpg" alt="" loading="lazy" style="object-position:center 30%">
           <p class="service-num">03</p>
           <h3 class="service-name">General Repair</h3>
           <p class="service-desc">Full-service maintenance and repair by experienced performance technicians.</p>
@@ -981,7 +979,7 @@
         </a>
 
         <a href="performance-upgrades.html" class="service-card reveal" style="--delay:0.00s">
-          <img src="photos/performance-upgrades.jpg" alt="" loading="lazy">
+          <video src="videos/perf-turbo.mp4" poster="videos/perf-turbo.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
           <p class="service-num">04</p>
           <h3 class="service-name">Performance Upgrades</h3>
           <p class="service-desc">Intakes, exhausts, turbos and more. Bolt-on gains done right.</p>
@@ -989,7 +987,7 @@
         </a>
 
         <a href="suspension-upgrades.html" class="service-card reveal" style="--delay:0.12s">
-          <img src="photos/suspension-upgrades.jpg" alt="" loading="lazy">
+          <img src="photos/suspension-kw.jpg" alt="" loading="lazy" style="object-position:center 72%">
           <p class="service-num">05</p>
           <h3 class="service-name">Suspension Upgrades</h3>
           <p class="service-desc">Coilovers, sway bars and alignment for a sharper, more controlled ride.</p>
@@ -1035,7 +1033,7 @@
         <div class="redline"></div>
         <div class="reviews-rating">
           <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-          <span><strong>4.8</strong> based on 78 Google reviews</span>
+          <span><strong>4.9</strong> out of 5 on Google</span>
         </div>
       </div>
       <div class="reviews-marquee reveal">
@@ -1091,7 +1089,7 @@
       </div>
       </div>
       <div class="reviews-actions">
-        <a class="btn-ghost" href="https://www.google.com/search?q=Zeus+Performance+LLC+Haverhill+MA+reviews" target="_blank" rel="noopener noreferrer">Read All Reviews</a>
+        <a class="btn-ghost" href="https://www.google.com/maps?cid=17581300239946684378" target="_blank" rel="noopener noreferrer">Read All Reviews</a>
         <a class="btn-ghost" href="https://search.google.com/local/writereview?placeid=ChIJ_ZDqT-Th4okR2heDI2tT_fM" target="_blank" rel="noopener noreferrer">Leave a Review</a>
       </div>
     </div>

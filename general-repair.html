@@ -9,11 +9,11 @@
     <meta property="og:site_name" content="Zeus Performance">
     <meta property="og:title" content="General Repair &amp; Maintenance — Zeus Performance">
     <meta property="og:description" content="General repair and maintenance services at Zeus Performance in Newbury, MA. Experienced performance technicians for diagnostics, maintenance, and full-service repair.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1200&q=80">
+    <meta property="og:image" content="https://zeuss-ruddy.vercel.app/photos/zeus-shop.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="General Repair &amp; Maintenance — Zeus Performance">
     <meta name="twitter:description" content="General repair and maintenance services at Zeus Performance in Newbury, MA. Experienced performance technicians for diagnostics, maintenance, and full-service repair.">
-    <meta name="twitter:image" content="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1200&q=80">
+    <meta name="twitter:image" content="https://zeuss-ruddy.vercel.app/photos/zeus-shop.jpg">
   <title>General Repair &amp; Maintenance — Zeus Performance</title>
   <link rel="icon" href="logo.png">
   <link rel="apple-touch-icon" href="logo.png">
@@ -107,7 +107,7 @@
       min-height: 400px;
       background-image:
         linear-gradient(rgba(11,13,16,0.65), rgba(11,13,16,0.65)),
-        url('https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?w=1400');
+        url('photos/general-repair.jpg');
       background-size: cover; background-position: center top;
       display: flex; flex-direction: column;
       align-items: flex-start; justify-content: flex-start;
@@ -252,7 +252,7 @@
       .hero {
         background-image:
           linear-gradient(rgba(11,13,16,0.65), rgba(11,13,16,0.65)),
-          url('https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?w=600&q=70');
+          url('photos/general-repair.jpg');
         padding: 80px 20px 40px;
       }
       .hero-headline { font-size: 48px; }
@@ -312,6 +312,37 @@
       .nav-links { gap: 22px; }
       .btn-nav-call { display: none; }
     }
+    /* ── HEADER PHOTO: Zeus's (tall) shop photo shown whole beside the text, blurred copy behind ── */
+    .hero-photo { display: none; }
+    @media (min-width: 900px) {
+      .hero {
+        position: relative; isolation: isolate; overflow: hidden;
+        display: grid !important;
+        grid-template-columns: minmax(0, 620px) auto;
+        grid-auto-rows: auto;
+        align-content: center; justify-content: center;
+        column-gap: clamp(40px, 6vw, 96px);
+        background: #0B0D10 !important;
+        min-height: 520px; padding: 72px 64px !important;
+      }
+      .hero::before {
+        content: ''; position: absolute; inset: -40px; z-index: -2;
+        background: url('photos/general-repair.jpg') center / cover;
+        filter: blur(30px) brightness(0.45);
+      }
+      .hero::after {
+        content: ''; position: absolute; inset: 0; z-index: -1;
+        background: linear-gradient(90deg, rgba(11,13,16,0.9) 0%, rgba(11,13,16,0.6) 60%, rgba(11,13,16,0.4) 100%);
+      }
+      .hero > *:not(.hero-photo) { grid-column: 1; justify-self: start; }
+      .hero-photo {
+        display: block; grid-column: 2; grid-row: 1 / span 6; align-self: center;
+        height: min(64vh, 460px); border-radius: 14px; overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.14);
+        box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 50px rgba(16,160,240,0.18);
+      }
+      .hero-photo img { height: 100%; width: auto; display: block; }
+    }
   </style>
 </head>
 <body>
@@ -359,6 +390,7 @@
 
   <!-- HERO -->
   <section class="hero">
+    <div class="hero-photo"><img src="photos/general-repair.jpg" alt="A classic Porsche 911 and a BMW in the Zeus shop"></div>
     <p class="hero-label">Repair &amp; Maintenance</p>
     <h1 class="hero-headline">General Repair<br>&amp; Maintenance</h1>
     <p class="hero-body"><strong style="color:#FFFFFF;">Reliable Care for Long-Lasting Performance.</strong> Your vehicle deserves the best, and at Zeus Performance, we provide top-tier general repair and maintenance services to keep it running smoothly. From routine oil changes to complex engine diagnostics, our experienced technicians ensure your car stays safe, efficient, and performance-ready.</p>

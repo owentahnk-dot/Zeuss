@@ -313,6 +313,39 @@
     .note { text-align: center; max-width: 640px; margin: 32px auto 0; font-size: 15px; line-height: 1.6; color: #9BA3AE; }
     .note a { color: #10A0F0; font-weight: 600; }
 
+    /* ── TIMELINE ── */
+    .sub-heading {
+      font-family: 'Barlow Condensed', sans-serif; font-style: italic; font-weight: 800;
+      font-size: 32px; text-transform: uppercase; text-align: center; margin: 72px 0 28px;
+    }
+    .timeline { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 900px; margin: 0 auto; }
+    .time-card { background: #181C22; border: 1px solid #2A2F37; border-radius: 6px; padding: 28px; }
+    .time-range {
+      font-family: 'Barlow Condensed', sans-serif; font-style: italic; font-weight: 800;
+      font-size: 48px; line-height: 1; color: #10A0F0; margin-bottom: 10px;
+    }
+    .time-range span { font-size: 18px; color: #9BA3AE; font-style: normal; font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; }
+    .time-card h4 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+    .time-card p:not(.time-range) { font-size: 14px; line-height: 1.6; color: #9BA3AE; }
+
+    /* ── PARTS ── */
+    .parts { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 900px; margin: 0 auto; }
+    .parts-col { background: #181C22; border: 1px solid #2A2F37; border-radius: 6px; padding: 28px; }
+    .parts-col.zeus { border-color: #10A0F0; box-shadow: 0 0 30px rgba(16,160,240,0.12); }
+    .parts-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: #FB4102; margin-bottom: 16px; }
+    .parts-col.zeus .parts-label { color: #10A0F0; }
+    .parts-col li { list-style: none; position: relative; padding-left: 26px; margin-bottom: 12px; font-size: 15px; line-height: 1.5; color: #D1D5DB; }
+    .parts-col li::before { content: '\2715'; position: absolute; left: 0; color: #FB4102; font-weight: 700; }
+    .parts-col.zeus li::before { content: '\2713'; color: #10A0F0; }
+
+    /* ── PROVIDERS ── */
+    .providers { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; max-width: 1000px; margin: 0 auto; }
+    .providers li {
+      flex: 0 0 calc(25% - 9px);
+      list-style: none; text-align: center; background: #181C22; border: 1px solid #2A2F37; border-radius: 6px;
+      padding: 18px 12px; font-size: 14px; font-weight: 600; color: #D1D5DB;
+    }
+
     /* ── FAQ ── */
     .faq { max-width: 860px; margin: 0 auto; }
     .faq details { border-bottom: 1px solid #2A2F37; }
@@ -414,6 +447,7 @@
       .section { padding: 80px 32px; }
       .steps { grid-template-columns: repeat(2, 1fr); }
       .cards { grid-template-columns: 1fr; }
+      .providers li { flex-basis: calc(33.33% - 8px); }
       .split { grid-template-columns: 1fr; gap: 40px; }
       .footer-inner { grid-template-columns: 1fr 1fr; padding: 48px 32px 32px; }
       .footer-bottom { padding: 18px 32px; }
@@ -435,7 +469,9 @@
       .chrome-heading { font-size: 38px; }
       .buttons { flex-direction: column; align-items: stretch; max-width: 360px; margin: 0 auto; }
       .btn-primary, .btn-ghost { text-align: center; }
-      .evidence, .steps, .compare, .checklist { grid-template-columns: 1fr; }
+      .evidence, .steps, .compare, .checklist, .timeline, .parts { grid-template-columns: 1fr; }
+      .providers li { flex-basis: calc(50% - 6px); }
+      .sub-heading { font-size: 26px; margin-top: 56px; }
       .callout { padding: 28px 22px; }
       .faq summary { font-size: 16px; }
       .cta-band { padding: 80px 20px; }
@@ -546,6 +582,20 @@
         <div class="step reveal" style="--delay:0.2s"><p class="step-num">03</p><h3>We Handle the Call</h3><p>We send the evidence and estimate to the warranty company, answer the adjuster&rsquo;s questions and get the repair authorized.</p></div>
         <div class="step reveal" style="--delay:0.3s"><p class="step-num">04</p><h3>Repair</h3><p>Once it&rsquo;s approved, we fix it right. You pay your deductible and anything your contract doesn&rsquo;t cover.</p></div>
       </div>
+      <h3 class="sub-heading reveal">How Long Does Approval Take?</h3>
+      <div class="timeline">
+        <div class="time-card reveal">
+          <p class="time-range">1&ndash;3 <span>business days</span></p>
+          <h4>Component Repairs</h4>
+          <p>Parts like alternators, starters, water pumps, AC compressors and sensors are usually approved quickly once the diagnosis is documented.</p>
+        </div>
+        <div class="time-card reveal" style="--delay:0.1s">
+          <p class="time-range">3&ndash;7+ <span>business days</span></p>
+          <h4>Engines &amp; Transmissions</h4>
+          <p>Major powertrain claims take longer. The warranty company may send an inspector or require a teardown before approving. We plan for that up front and keep you posted.</p>
+        </div>
+      </div>
+      <p class="note reveal">Timelines are typical, not guaranteed. The warranty company sets the pace, and we push to keep it moving.</p>
     </div>
   </section>
 
@@ -614,6 +664,63 @@
   <section class="section">
     <div class="container">
       <div class="section-header reveal">
+        <p class="eyebrow">&mdash; Parts Matter &mdash;</p>
+        <h2 class="chrome-heading">We Don&rsquo;t Bolt On<br>Junk Parts</h2>
+        <div class="redline"></div>
+        <p class="body-copy">To save money, warranty companies often send the cheapest part they can find: a salvage-yard pull or a bargain rebuild. Plenty of shops install whatever shows up. We don&rsquo;t.</p>
+      </div>
+      <div class="parts reveal">
+        <div class="parts-col">
+          <p class="parts-label">What the warranty company may send</p>
+          <ul>
+            <li>Used or salvage parts</li>
+            <li>The lowest-cost rebuilt unit available</li>
+            <li>No inspection before it ships</li>
+          </ul>
+        </div>
+        <div class="parts-col zeus">
+          <p class="parts-label">How Zeus handles it</p>
+          <ul>
+            <li>Every part inspected when it arrives</li>
+            <li>Bad parts photographed, documented and sent back</li>
+            <li>We push for quality rebuilt or OEM parts when your contract allows</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="eyebrow">&mdash; Warranty Companies &mdash;</p>
+        <h2 class="chrome-heading">Plans We Work With</h2>
+        <div class="redline"></div>
+        <p class="body-copy">We handle claims with the major third-party warranty and service contract companies, including:</p>
+      </div>
+      <ul class="providers reveal">
+        <li>Endurance</li>
+        <li>American Auto Shield</li>
+        <li>GWC Warranty</li>
+        <li>EasyCare</li>
+        <li>Royal Administration Services</li>
+        <li>CarGuard Administration</li>
+        <li>Smart Auto Care</li>
+        <li>Alpha Warranty Services</li>
+        <li>Penn Warranty</li>
+        <li>Preferred Warranties (PWI)</li>
+        <li>Assurant</li>
+        <li>Fidelity Warranty Services</li>
+        <li>Aegis</li>
+        <li>Matrix Warranty Solutions</li>
+      </ul>
+      <p class="note reveal">Don&rsquo;t see your plan? <a href="tel:+19788530384">Call us</a> with your plan name and we&rsquo;ll check. Most contracts let you choose any licensed repair shop.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal">
         <p class="eyebrow">&mdash; Come Prepared &mdash;</p>
         <h2 class="chrome-heading">What to Bring</h2>
         <div class="redline"></div>
@@ -624,8 +731,6 @@
         <li><span><strong>Maintenance records</strong>, such as oil change receipts</span></li>
         <li><span><strong>Any denial letters</strong> or emails from past claims</span></li>
       </ul>
-      <!-- TODO (Zeus): add the list of warranty companies you work with here -->
-      <p class="note reveal">We work with third-party warranty companies and vehicle service contracts. Not sure if yours is covered? <a href="tel:+19788530384">Call us</a> with your plan name and we&rsquo;ll check.</p>
     </div>
   </section>
 
