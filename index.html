@@ -956,7 +956,6 @@
 
         <a href="services.html" class="service-card reveal" style="--delay:0.00s">
           <video src="videos/dyno-m4.mp4" poster="videos/dyno-m4.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
-          <p class="service-num">01</p>
           <h3 class="service-name">Dyno Tuning</h3>
           <p class="service-desc">Custom ECU mapping on our in-house dyno for maximum power and efficiency.</p>
           <span class="text-link">Learn More &rarr;</span>
@@ -964,15 +963,13 @@
 
         <a href="ecu-bench-unlock.html" class="service-card reveal" style="--delay:0.12s">
           <img src="photos/ecu-unlock.jpg" alt="" loading="lazy">
-          <p class="service-num">02</p>
           <h3 class="service-name">ECU Bench Unlock</h3>
-          <p class="service-desc">Unlock hidden performance directly on the bench, no running vehicle needed.</p>
+          <p class="service-desc">In-house bench unlocks, including post-2020 BMW &amp; Supra ECUs. Mail-in available.</p>
           <span class="text-link">Learn More &rarr;</span>
         </a>
 
         <a href="general-repair.html" class="service-card reveal" style="--delay:0.24s">
           <img src="photos/general-repair-card.jpg" alt="" loading="lazy" style="object-position:center 30%">
-          <p class="service-num">03</p>
           <h3 class="service-name">General Repair</h3>
           <p class="service-desc">Full-service maintenance and repair by experienced performance technicians.</p>
           <span class="text-link">Learn More &rarr;</span>
@@ -980,7 +977,6 @@
 
         <a href="performance-upgrades.html" class="service-card reveal" style="--delay:0.00s">
           <video src="videos/perf-turbo.mp4" poster="videos/perf-turbo.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
-          <p class="service-num">04</p>
           <h3 class="service-name">Performance Upgrades</h3>
           <p class="service-desc">Intakes, exhausts, turbos and more. Bolt-on gains done right.</p>
           <span class="text-link">Learn More &rarr;</span>
@@ -988,7 +984,6 @@
 
         <a href="suspension-upgrades.html" class="service-card reveal" style="--delay:0.12s">
           <img src="photos/suspension-kw.jpg" alt="" loading="lazy" style="object-position:center 72%">
-          <p class="service-num">05</p>
           <h3 class="service-name">Suspension Upgrades</h3>
           <p class="service-desc">Coilovers, sway bars and alignment for a sharper, more controlled ride.</p>
           <span class="text-link">Learn More &rarr;</span>
@@ -996,7 +991,6 @@
 
         <a href="wheels-tires.html" class="service-card reveal" style="--delay:0.24s">
           <img src="photos/wheels-tires.jpg" alt="" loading="lazy">
-          <p class="service-num">06</p>
           <h3 class="service-name">Wheels &amp; Tires</h3>
           <p class="service-desc">Custom wheel fitment and tire mounting for street and track builds.</p>
           <span class="text-link">Learn More &rarr;</span>
@@ -1114,7 +1108,7 @@
     <div class="footer-inner">
       <div>
         <img class="footer-logo" src="logo.png" alt="Zeus Performance" loading="lazy">
-        <p class="footer-tagline">Dyno tuning, performance upgrades and general repair for luxury and sports vehicles. Machined precision.</p>
+        <p class="footer-tagline">Precision &middot; Structure &middot; Results</p>
       </div>
       <div class="footer-col">
         <p class="footer-heading">Services</p>
@@ -1142,7 +1136,7 @@
     </div>
     <div class="footer-bottom">
       <p class="footer-copyright">&copy; 2026 Zeus Performance LLC. All rights reserved.</p>
-      <p class="footer-copyright">Machined Precision.</p>
+      <p class="footer-copyright">Newbury, MA</p>
     </div>
   </footer>
 
@@ -1180,6 +1174,27 @@
         });
       }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
       items.forEach(function (el) { io.observe(el); });
+    })();
+  </script>
+
+  <script>
+    /* Keep the silent shop videos playing. iPhones in Low Power Mode block autoplay until the
+       visitor touches the page, so retry when a video scrolls into view and on the first touch. */
+    (function () {
+      function start(v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+      function all() { return Array.prototype.slice.call(document.querySelectorAll('video[autoplay]')); }
+      function startAll() { all().forEach(function (v) { if (v.paused) start(v); }); }
+      startAll();
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { if (e.isIntersecting && e.target.paused) start(e.target); });
+        }, { threshold: 0.2 });
+        all().forEach(function (v) { io.observe(v); });
+      }
+      ['touchstart', 'pointerdown', 'scroll', 'keydown'].forEach(function (ev) {
+        window.addEventListener(ev, startAll, { passive: true, once: true });
+      });
+      document.addEventListener('visibilitychange', function () { if (!document.hidden) startAll(); });
     })();
   </script>
 

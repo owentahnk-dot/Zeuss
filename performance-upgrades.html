@@ -460,7 +460,7 @@
     <div class="footer-inner">
       <div>
         <img class="footer-logo" src="logo.png" alt="Zeus Performance" loading="lazy">
-        <p class="footer-tagline">Machined Precision.</p>
+        <p class="footer-tagline">Precision &middot; Structure &middot; Results</p>
       </div>
       <div class="footer-col">
         <a href="services.html">Services</a>
@@ -483,6 +483,27 @@
     <a href="contact.html" class="mobile-cta-quote">Get a Free Quote</a>
     <a href="tel:+19788530384" class="mobile-cta-call">Call Now</a>
   </div>
+
+  <script>
+    /* Keep the silent shop videos playing. iPhones in Low Power Mode block autoplay until the
+       visitor touches the page, so retry when a video scrolls into view and on the first touch. */
+    (function () {
+      function start(v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+      function all() { return Array.prototype.slice.call(document.querySelectorAll('video[autoplay]')); }
+      function startAll() { all().forEach(function (v) { if (v.paused) start(v); }); }
+      startAll();
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { if (e.isIntersecting && e.target.paused) start(e.target); });
+        }, { threshold: 0.2 });
+        all().forEach(function (v) { io.observe(v); });
+      }
+      ['touchstart', 'pointerdown', 'scroll', 'keydown'].forEach(function (ev) {
+        window.addEventListener(ev, startAll, { passive: true, once: true });
+      });
+      document.addEventListener('visibilitychange', function () { if (!document.hidden) startAll(); });
+    })();
+  </script>
 
 </body>
 </html>
